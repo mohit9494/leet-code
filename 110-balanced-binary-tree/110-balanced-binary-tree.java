@@ -14,34 +14,28 @@
  * }
  */
 class Solution {
+
     
-  private int depth(TreeNode root) {
-      
-     if (root == null) return 0;
-     
-     int left = depth(root.left);
-     if(left == -1) return -1;
-      
-     int right = depth(root.right);
-     if(right == -1) return -1;
-      
-     if(Math.abs(left - right) > 1 ) return -1 ; 
-     
-    return 1 + Math.max(left,right);
-      
-      
-      
-  }
-    
-    
+    private int depth(TreeNode root) {
+        
+        if(root == null) return 0;
+        
+        int ld = depth(root.left);
+        if(ld == -1) return -1;
+        
+        int rd = depth(root.right);
+        if(rd == -1) return -1;
+        
+        if(Math.abs(ld - rd) > 1) return -1;
+            
+        return 1 + Math.max(ld, rd);
+        
+    }
     
     public boolean isBalanced(TreeNode root) {
         
-        
-       // If it doesn't return -1 then it is balanced
+   
         return depth(root) != -1;
-        
-        
         
     }
 }

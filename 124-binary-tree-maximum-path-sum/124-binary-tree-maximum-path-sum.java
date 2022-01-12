@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    
+    // Input can be negative
     int sum = Integer.MIN_VALUE;
     
     private int helper(TreeNode root) {

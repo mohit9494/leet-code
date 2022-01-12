@@ -34,7 +34,7 @@ class Solution {
     
     public boolean isBalanced(TreeNode root) {
         
-   
+        // Tree is balanced if it doen't have -1 depth
         return depth(root) != -1;
         
     }

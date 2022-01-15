@@ -1,5 +1,12 @@
 public class Solution {
     public List<Integer> diffWaysToCompute(String input) {
+        
+        Map<String, List<Integer>> hashMap = new HashMap<>();
+        
+        if(hashMap.containsKey(input)) {
+            return hashMap.get(input);
+        }
+        
         List<Integer> ret = new LinkedList<Integer>();
         for (int i=0; i<input.length(); i++) {
             if (input.charAt(i) == '-' ||
@@ -28,6 +35,8 @@ public class Solution {
         if (ret.size() == 0) {
             ret.add(Integer.valueOf(input));
         }
+        
+        hashMap.put(input, ret);
         return ret;
     }
 }

@@ -1,11 +1,9 @@
 public class Solution {
     
-    private final Map<String, List<Integer>> hashMap = new HashMap<>();
+     Map<String, List<Integer>> hashMap = new HashMap<>();
     
     public List<Integer> diffWaysToCompute(String input) {
-        
-        
-        
+      
         if(hashMap.containsKey(input)) {
             return hashMap.get(input);
         }

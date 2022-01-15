@@ -1,6 +1,6 @@
 public class Solution {
     
-    Map<String, List<Integer>> hashMap = new HashMap<>();
+    private final Map<String, List<Integer>> hashMap = new HashMap<>();
     
     public List<Integer> diffWaysToCompute(String input) {
         

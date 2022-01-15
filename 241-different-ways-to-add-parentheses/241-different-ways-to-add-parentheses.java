@@ -1,7 +1,10 @@
 public class Solution {
+    
+    Map<String, List<Integer>> hashMap = new HashMap<>();
+    
     public List<Integer> diffWaysToCompute(String input) {
         
-        Map<String, List<Integer>> hashMap = new HashMap<>();
+        
         
         if(hashMap.containsKey(input)) {
             return hashMap.get(input);

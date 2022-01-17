@@ -20,7 +20,12 @@ class Solution {
        if (root == null) return 0 ;
         
        int lh = heightHelper(root.left);
+        if(lh == -1) return -1;
+        
         int rh = heightHelper(root.right);
+        if(rh == -1) return -1;
+        
+        if(Math.abs(lh - rh) > 1) return -1;
          
         return  Math.max(lh,rh) + 1;
 }
@@ -28,20 +33,11 @@ class Solution {
     public boolean isBalanced(TreeNode root) {
         
         
+     int flag = heightHelper(root);
+    
+        if(flag == -1) return false;
         
-       if(root == null) return true; 
-        
-        int lh = heightHelper(root.left);
-        int rh = heightHelper(root.right);
-        
-        if(Math.abs(lh - rh) > 1) return false;
-        
-        boolean l = isBalanced(root.left);
-        boolean r = isBalanced(root.right);
-        
-        if(!l || !r) return false;
-        else return true;
-        
+        return true;
         
     }
     

@@ -21,6 +21,7 @@ class Solution {
         
         if(root == null) return 0;
         
+        // DO NOT CONSIDER -ve Path sum.replace with 0.
         int lv = Math.max(0,helper(root.left));
         int rv = Math.max(0,helper(root.right));
         

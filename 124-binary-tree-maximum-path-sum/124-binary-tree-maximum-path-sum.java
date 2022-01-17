@@ -14,26 +14,25 @@
  * }
  */
 class Solution {
-    // Input can be negative
-    int sum = Integer.MIN_VALUE;
+    
+    int max = Integer.MIN_VALUE;
     
     private int helper(TreeNode root) {
         
         if(root == null) return 0;
         
-        // Ignore all the negative path and replace with 0 as it reduces the weight of current              //path
-        int leftSum = Math.max(0, helper(root.left));
-        int rightSum = Math.max(0, helper(root.right));
+        int lv = Math.max(0,helper(root.left));
+        int rv = Math.max(0,helper(root.right));
         
-        sum = Math.max(sum, leftSum + rightSum + root.val);
+       
+        max = Math.max(max, lv + rv+ root.val);
         
-        return root.val + Math.max(leftSum, rightSum);
+        return root.val + Math.max(lv, rv);
     }
     
+    
     public int maxPathSum(TreeNode root) {
-        
         helper(root);
-        
-        return sum;
+        return max;
     }
 }

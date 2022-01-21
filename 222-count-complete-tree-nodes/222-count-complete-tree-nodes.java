@@ -30,7 +30,7 @@ class Solution {
     public int getRightHeight(TreeNode root) {
         
       
-        int level = 0;
+        int level = 1;
         
         while(root.right != null) {
             level++;

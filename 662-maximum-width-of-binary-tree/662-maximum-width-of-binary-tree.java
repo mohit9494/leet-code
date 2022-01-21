@@ -41,11 +41,11 @@ class Solution {
             
           int size = q.size();
           int first =0, last = 0;
-            
+          int min = q.peek().num;  
             for(int i = 0; i< size;i++) {
                 Tuple t =q.poll();
                 TreeNode node = t.node;
-                int id = t.num;
+                int id = t.num - min;
                 
                 if(i == 0) first = id;
                 if(i == size - 1) last = id;

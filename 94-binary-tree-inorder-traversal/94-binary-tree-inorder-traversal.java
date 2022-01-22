@@ -21,7 +21,35 @@ class Solution {
     
     public List<Integer> inorderTraversal(TreeNode root) {
         
-       if(root == null) return result; 
+        // Morris Traversal
+        TreeNode cur = root;
+        
+        while(cur != null) {
+            
+            if(cur.left == null) {
+               result.add(cur.val);
+                cur = cur.right;
+            } else {
+                TreeNode temp = cur.left;
+                
+                while(temp.right != null && temp.right != cur) {
+                    temp = temp.right;
+                }
+                
+                if(temp.right == null) {
+                    temp.right = cur;
+                    cur = cur.left;
+                } else {
+                    temp.right = null;
+                    result.add(cur.val);
+                    cur = cur.right;
+                }
+            } 
+           
+            
+        }
+        
+     /*  if(root == null) return result; 
         
        Stack<TreeNode> st = new Stack<>(); 
         
@@ -35,14 +63,14 @@ class Solution {
             } else {
                 
                 if(st.isEmpty()) break;
+                
                 node  = st.pop();
                 result.add(node.val);
-                
                 node = node.right;
                 
             }
    
-        }
+        } */
         
         return result;
         

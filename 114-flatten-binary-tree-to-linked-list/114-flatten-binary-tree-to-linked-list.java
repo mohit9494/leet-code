@@ -28,7 +28,8 @@ class Solution {
             root.right = prev;
             root.left = null;
             prev = root;*/
-        
+   
+        /*
         //2 using Stacks
         if(root == null) return ;
         
@@ -46,10 +47,36 @@ class Solution {
                 node.right = st.peek();
                 node.left = null;
             }
+       
+        } */
+        
+        // 3 => Morris Traversal
+        
+        if(root == null) return ;
+        
+        TreeNode curr = root;
+        
+        while(curr != null) {
             
+            if(curr.left != null) {
+               
+                TreeNode temp  = curr.left;
+                
+                while(temp.right!= null) temp = temp.right;
+                
+                temp.right = curr.right;
+                curr.right = curr.left;
+                
+            }
             
+            curr = curr.right ; 
+
         }
         
+        while(root != null) {
+            root.left = null;
+            root = root.right;
+        }
      
     }
 }

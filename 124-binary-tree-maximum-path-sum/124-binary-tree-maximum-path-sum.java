@@ -21,19 +21,19 @@ class Solution {
         
         if(root == null) return 0;
         
-        // DO NOT CONSIDER -ve Path sum.replace with 0.
-        int lv = Math.max(0,helper(root.left));
-        int rv = Math.max(0,helper(root.right));
+        int ls = Math.max(0,helper(root.left));
+        int rs = Math.max(0,helper(root.right));
         
-       
-        max = Math.max(max, lv + rv+ root.val);
+        max = Math.max(max, ls + rs + root.val);
         
-        return root.val + Math.max(lv, rv);
+        return root.val + Math.max(ls, rs);
+        
     }
     
-    
     public int maxPathSum(TreeNode root) {
-        helper(root);
+        
+        helper(root); 
+        
         return max;
     }
 }

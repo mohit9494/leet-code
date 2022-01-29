@@ -27,9 +27,25 @@ class Solution {
         
     }
     
+    private TreeNode helper(TreeNode root, TreeNode p, TreeNode q) {
+        
+        if(root == null) return null;
+        
+        if(root == p || root == q) return root;
+        
+        TreeNode ln = helper(root.left,p,q);
+        TreeNode rn = helper(root.right,p,q);
+        
+        if(ln == null) return rn;
+        else if(rn == null) return ln;
+        else return root; // Got the output
+ }
+    
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         
-        //Using Brute Force
+        return helper(root, p,q);
+        
+    /*    //Using Brute Force
         List<TreeNode> path1 = new ArrayList();
         List<TreeNode> path2 = new ArrayList();
         
@@ -47,7 +63,7 @@ class Solution {
             
         }
         
-        return ans.get(ans.size() - 1);
+        return ans.get(ans.size() - 1); */
         
     }
 }

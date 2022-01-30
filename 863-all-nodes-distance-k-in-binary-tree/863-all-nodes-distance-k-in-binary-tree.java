@@ -9,85 +9,78 @@
  */
 class Solution {
     
-    public void markParent(TreeNode root, Map<TreeNode, TreeNode> parentMap) {
+    List<Integer> ans  = new ArrayList();
+    
+    private void buildParentMap(TreeNode root, Map<TreeNode, TreeNode> parentMap){
         
-        Queue<TreeNode> q = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList();
         q.add(root);
         
-        while(!q.isEmpty()){
+        while(!q.isEmpty()) {
             
             TreeNode node = q.poll();
             
-            if(node.left!=null) {
+            if(node.left != null) {
                 q.add(node.left);
                 parentMap.put(node.left, node);
             }
             
-             if(node.right!=null) {
+             if(node.right != null) {
                 q.add(node.right);
                 parentMap.put(node.right, node);
             }
-            
             
         }
         
     }
     
-    
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
         
-        Map<TreeNode,TreeNode> parentMap = new HashMap<>();
+        if(root == null) return ans;
         
-        markParent(root, parentMap);
+        Map<TreeNode, TreeNode> parentMap = new HashMap();        
+        // Build parent Map
+        buildParentMap(root, parentMap);
         
-        Map<TreeNode, Boolean> vis = new HashMap<>();
-        Queue<TreeNode> q = new LinkedList<>();
-        
+        Queue<TreeNode> q = new LinkedList();
         q.add(target);
-        vis.put(target, true);
+        
+        Set<TreeNode> vis = new HashSet();
+        vis.add(target);
         
         int level = 0;
         
-        while(!q.isEmpty()){
+        while(!q.isEmpty()) {
             
-            int size = q.size();
+          if(level == k) break;  
+          int size = q.size();
             
-            if(level == k) break;
+            
+          for(int i = 0; i< size; i++) {
+              
+             TreeNode node = q.poll(); 
+             
+             if(node.left != null && !vis.contains(node.left)) {
+                 q.add(node.left);
+                 vis.add(node.left);
+             } 
+              
+               if(node.right != null && !vis.contains(node.right)) {
+                 q.add(node.right);
+                 vis.add(node.right);
+             } 
+              
+              if(parentMap.get(node) != null && !vis.contains(parentMap.get(node))) {
+                 q.add(parentMap.get(node));
+                 vis.add(parentMap.get(node));
+             }  
+          } 
+            
             level++;
-            
-            for(int i = 0; i< size; i++) {
-                
-                TreeNode node = q.poll();
-                
-                if(node.left != null && vis.get(node.left) == null) {
-                    q.add(node.left);
-                    vis.put(node.left, true);
-                }
-                
-                 if(node.right != null && vis.get(node.right) == null) {
-                    q.add(node.right);
-                    vis.put(node.right, true);
-                }
-                
-                 if(parentMap.get(node) != null && vis.get(parentMap.get(node)) == null) {
-                    q.add(parentMap.get(node));
-                    vis.put(parentMap.get(node), true);
-                }
-                
-                
-            }
-            
-            
-            
             
         }
         
-        
-        List<Integer> ans = new ArrayList<>();
-        
         while(!q.isEmpty()) ans.add(q.poll().val);
-        
         return ans;
-        
     }
 }

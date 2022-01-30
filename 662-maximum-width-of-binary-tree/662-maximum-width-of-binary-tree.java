@@ -19,47 +19,55 @@ class Solution {
     
     class Tuple{
         
-        TreeNode node;
+    TreeNode node;
         int num;
         
-        Tuple(TreeNode node , int num) {
-            this.node = node;
-            this.num = num;
-        }
+    public Tuple(TreeNode node, int num){
+        this.node = node;
+        this.num = num;
+    }
         
         
     }
     
+    
     public int widthOfBinaryTree(TreeNode root) {
+        
         
         if(root == null) return width;
         
-        Queue<Tuple> q =new LinkedList<>();
+        Queue<Tuple> q = new LinkedList();
         q.add(new Tuple(root,0));
         
         while(!q.isEmpty()) {
             
-          int size = q.size();
-          int first =0, last = 0;
-          int min = q.peek().num;  
-            for(int i = 0; i< size;i++) {
-                Tuple t =q.poll();
+            int size = q.size();
+            int min = q.peek().num;
+            int first=0;
+            int last=0;
+            
+            for(int i = 0; i< size; i++) {
+                
+                Tuple t = q.poll();
                 TreeNode node = t.node;
+                
+                // calculate id by subtract min from the real val
                 int id = t.num - min;
                 
                 if(i == 0) first = id;
                 if(i == size - 1) last = id;
                 
+                
                 if(node.left != null) q.add(new Tuple(node.left, 2*id + 1));
                 if(node.right != null) q.add(new Tuple(node.right, 2*id + 2));
-                
             }
             
-            width = Math.max(width, last- first + 1);
-            
+            width = Math.max(width, last - first + 1);
+    
         }
         
-     
+        
         return width;
-     
-}}
+
+    }
+}

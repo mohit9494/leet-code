@@ -15,28 +15,27 @@
  */
 class Solution {
     
-    public int getLeftHeight(TreeNode root) {
-        int level  = 1;
+    private int getLeftHeight(TreeNode root) {
         
-        while(root.left != null) {
-             level++;
+        int level = 0;
+        
+        while(root != null) {
             root = root.left;
-           
+            level++;
         }
         
         return level;
     }
     
-    public int getRightHeight(TreeNode root) {
+    private int getRightHeight(TreeNode root) {
         
-      
-        int level = 1;
+        int level = 0;
         
-        while(root.right != null) {
-            level++;
-            root = root.right;
+        while(root != null) {
             
-        } 
+            root = root.right;
+            level++;
+        }
         
         return level;
     }
@@ -45,12 +44,11 @@ class Solution {
         
         if(root == null) return 0;
         
-        int left = getLeftHeight(root);
-        int right = getRightHeight(root);
+        int lh = getLeftHeight(root);
+        int rh = getRightHeight(root);
         
-        if(left == right) return (int)Math.pow(2, left) - 1;
+        if (lh == rh) return (int) Math.pow(2,lh) - 1;
         
         return 1 + countNodes(root.left) + countNodes(root.right);
-        
     }
 }

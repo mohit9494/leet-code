@@ -15,34 +15,31 @@
  */
 class Solution {
     
-    int preorderIndex = 0;
-    Map<Integer, Integer> imap = new HashMap();
+    int preIndex = 0;
+    Map<Integer, Integer> map = new HashMap();
     
-    public TreeNode treeHelper(int[] preorder, int left, int right) {
-      
-        // if there are no elements to construct the tree
+    private TreeNode treeHelper(int[] preorder, int left, int right){
+        
+        // If no elements are there to construct the tree
         if(left > right) return null;
         
-        int rootValue = preorder[preorderIndex++];
+        int rootValue = preorder[preIndex++];
         TreeNode root = new TreeNode(rootValue);
         
-        // BUILD THE LEFT AND RIGHT SUBTREE
-        root.left = 
-            treeHelper(preorder, left, imap.get(rootValue) - 1);
-        
-        root.right = treeHelper(preorder, imap.get(rootValue) + 1, right);
-        
-        return root;
+        // Move through the range of Inorder
+        root.left = treeHelper(preorder, left, map.get(rootValue) - 1);
+        root.right = treeHelper(preorder, map.get(rootValue) + 1, right);
+            
+        return root;    
     }
-       
+    
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         
-        // fill the map with value and index
-        for(int i = 0; i< inorder.length; i++) {
-            imap.put(inorder[i],i);
-        }
+        // Create Map from inorder -> Used to find Left and right subtree
+        for(int i = 0 ; i<= inorder.length - 1; i++) map.put(inorder[i], i);
         
-        // build the tree using helper function
-        return treeHelper(preorder, 0, preorder.length - 1);
+        // Build Tree using preorder and Helper -> Preorder Gives root element
+        return treeHelper(preorder, 0, inorder.length - 1);
+        
     }
 }

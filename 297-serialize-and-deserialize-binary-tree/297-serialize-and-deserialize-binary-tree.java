@@ -9,66 +9,73 @@
  */
 public class Codec {
 
+    StringBuilder rs = new StringBuilder();
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         
-        if(root == null) return "";
+        if (root == null) return "#";
         
-        StringBuilder path = new StringBuilder();
         Queue<TreeNode> q = new LinkedList();
         q.add(root);
         
         while(!q.isEmpty()) {
-           
-            TreeNode node = q.poll();
+            
+            TreeNode node  = q.poll();
             
             if(node == null) {
-             path.append("# ");
-                continue;
+                rs.append("# ");
+            continue;
             }
-            path.append(node.val + " ");
+            
+            rs.append(node.val + " ");
+            
             q.add(node.left);
             q.add(node.right);
+            
+            
         }
         
         
-        return path.toString();
+        return rs.toString();
+        
         
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
         
-        if(data == "") return null;
-        
-        Queue<TreeNode> q = new LinkedList();
-        
         String[] vals = data.split(" ");
+        
         int valIndex = 0;
         
-        TreeNode root = new TreeNode(Integer.parseInt(vals[0]));
+        if(vals[valIndex].equals("#")) return null;
+        
+        Queue<TreeNode> q = new LinkedList(); 
+        TreeNode root = new TreeNode(Integer.valueOf(vals[0]));
         q.add(root);
         
-        
         while(!q.isEmpty()) {
-          
-            TreeNode parent = q.poll();
             
+           TreeNode node  = q.poll();
+            String a = vals[++valIndex];
+            String b = vals[++valIndex];
             
-            if(!vals[++valIndex].equals("#")) {
-                TreeNode tempLeft = new TreeNode(Integer.parseInt(vals[valIndex]));
-                q.add(tempLeft);
-                parent.left = tempLeft;
-            }
+           if(!a.equals("#")) {
+               
+               node.left = new TreeNode(Integer.valueOf(a));
+               q.add(node.left);
+           } 
             
-             if(!vals[++valIndex].equals("#")) {
-                TreeNode tempRight = new TreeNode(Integer.parseInt(vals[valIndex]));
-                q.add(tempRight);
-                parent.right = tempRight;
-            }
+            if(!b.equals("#")) {
+               
+               node.right = new TreeNode(Integer.valueOf(b));
+               q.add(node.right);
+           } 
+            
         }
- 
-       return root; 
+        
+        return root;
+        
     }
 }
 

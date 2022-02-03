@@ -19,17 +19,49 @@ class Solution {
     
     public void flatten(TreeNode root) {
         
+        // 3 -> Morris Traversal
+        
+        TreeNode curr = root;
+            
+        while(curr != null) {
+            
+            if(curr.left == null) {
+            curr = curr.right;
+        }
+            else {
+                
+                // Build the thread
+                TreeNode prev = curr.left;
+                
+                while(prev.right != null) {                   
+                   prev = prev.right;  
+                }
+                
+                //connect with curr.right
+                prev.right = curr.right;
+                
+                curr.right = curr.left;
+                curr.left = null;
+                
+                curr = curr.right;
+                
+                
+            }
+        }    
+        
+        
+        
         // 2 -> Using Recursion
         // -> RLN -> MOVE Left connection to right
         
-        if(root == null) return;
+//         if(root == null) return;
         
-        flatten(root.right);
-        flatten(root.left);
+//         flatten(root.right);
+//         flatten(root.left);
         
-        root.right = prev;
-        root.left = null;
-        prev = root;
+//         root.right = prev;
+//         root.left = null;
+//         prev = root;
         
         // 1 -> Using Stack -> Like preorder
         

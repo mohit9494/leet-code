@@ -30,7 +30,7 @@ class Solution {
         
         if (count == 0) return ;
         
-        k_val = Math.max(k_val, root.val);
+        k_val = root.val;
          // Add in PQ
        // q.add(root.val);
         count--;

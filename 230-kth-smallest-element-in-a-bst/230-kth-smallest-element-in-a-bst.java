@@ -15,9 +15,10 @@
  */
 class Solution {
     
-    PriorityQueue<Integer> q = new PriorityQueue<>((a,b) -> b - a);
+  //  PriorityQueue<Integer> q = new PriorityQueue<>((a,b) -> b - a);
     
     int count = 0;
+    int k_val = 0;
     
     private void helper(TreeNode root) {
         
@@ -28,8 +29,10 @@ class Solution {
         helper(root.left);
         
         if (count == 0) return ;
+        
+        k_val = Math.max(k_val, root.val);
          // Add in PQ
-        q.add(root.val);
+       // q.add(root.val);
         count--;
         
         helper(root.right);
@@ -43,9 +46,11 @@ class Solution {
         
         count = k;
        
-      helper(root);
+        helper(root);
         
-        return q.peek();
+        return k_val;
+        
+       // return q.peek();
         
         
     }

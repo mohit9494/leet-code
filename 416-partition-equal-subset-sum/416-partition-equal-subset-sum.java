@@ -1,5 +1,6 @@
 class Solution {
     
+    // Top Down DP
     private boolean isSubsetSum(int[] nums, int sum, int n, Boolean[][] t){
         
         // If sum is 0 => all true
@@ -18,6 +19,7 @@ class Solution {
     
     }
     
+    // Bottom Up DP
     private boolean isSubsetSum2(int[] nums, int sum, int n, Boolean[][] t){
       
        for(int i = 0; i < n+1; i++) t[i][0] = true;

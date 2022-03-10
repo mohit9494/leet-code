@@ -34,36 +34,41 @@ class GFG
 
 class Solution{
 
+    static int helper(int N, int arr[], int sum, int[][] v) {
 
+        
+        if(sum == 0 ) return 1;
+        if(N == 0) return 0;
+        
+        if (v[N][sum] != -1) {
+            return v[N][sum];
+        } 
+        
+        if(arr[N-1] > sum) {
+            return v[N][sum] = helper(N-1, arr, sum, v);
+        }
+        else {
+            return v[N][sum] = helper(N-1, arr, sum - arr[N-1],v) | helper(N-1, arr, sum,v);
+        }
+    }
 
 
     static boolean isSubsetSum(int N, int arr[], int sum){
         // code here
-        boolean[][] t = new boolean[N+1][sum+1];
+        // boolean[][] t = new boolean[N+1][sum+1];
+        int[][] visited =new int[N+1][sum + 1];
         
-        //  For sum == 0 all True
-        for(int i = 0 ; i < N+1; i++) t[i][0] = true;
-        
-        // For n == 0 and sum > 0 all false
-        for(int j = 1; j < sum + 1; j++) t[0][j] = false;
-        
-        // Iterate Now
-        for(int i = 1 ; i < N+1 ; i++) {
-            for(int j = 1; j < sum + 1; j++) {
-                
-                // value is > sum
-                if(arr[i - 1] > j) {
-                    t[i][j] = t[i-1][j];
-                } else {
-                    t[i][j] = t[i-1][j - arr[i-1]] || t[i-1][j];
-                }
-                
-                
+        // Initialize the array with -1;
+        for(int i = 0 ; i < N + 1 ; i++) {
+            for(int j = 0; j < sum + 1; j++){
+                visited[i][j] = -1;
             }
         }
         
-        return t[N][sum];
         
         
+       int k = helper(N, arr, sum, visited);
+       
+       return k == 0 ? false : true; 
     }
 }

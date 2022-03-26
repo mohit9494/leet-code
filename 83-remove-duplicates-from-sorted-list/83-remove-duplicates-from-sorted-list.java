@@ -11,27 +11,26 @@
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         
-      if(head == null || head.next == null) return head;
+        if(head == null || head.next == null) return head;
         
+        // Use two pointer
         ListNode i = head;
         ListNode j = head.next;
         
-        while(i != null && j != null) {
+        while(j != null) {
             
             if(i.val == j.val) {
-               j = j.next; 
+                j = j.next;
             } else {
                 i.next = j;
-                i = i.next;
                 j = j.next;
-            }
-            
-            
+                i = i.next;
+            }   
         }
         
-        i.next = null;
+        i.next = j;
         
         return head;
-        
+   
     }
 }

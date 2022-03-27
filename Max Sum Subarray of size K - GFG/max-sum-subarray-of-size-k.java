@@ -40,24 +40,31 @@ class Solution{
     
     if(k > n) return -1;
     
-    int start = 0;
+    int i = 0;
+    int j = 0;
     int maxi = Integer.MIN_VALUE;
     int sum = 0;
     
-    for(int end = 0; end < n; end++) {
+    while(j < n) {
         
-        sum += Arr.get(end);
+        sum = sum + Arr.get(j);
         
-        // Window reached
-        if (end >= k-1) {
+        if(j - i + 1 < k) {
+            j++;
+        } else if (j -i +1 == k) {
             
             maxi = Math.max(maxi, sum);
-            sum = sum - Arr.get(start);
-            start++;
+            //sliding the window
+            sum = sum - Arr.get(i);
+            // increment
+            i++;
+            j++;
             
         }
-    }
-return maxi;
+            
+        }
+      return maxi;  
         
     }
+
 }

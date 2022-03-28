@@ -44,10 +44,9 @@ class GfG
             } else  {
                 if (map.containsKey(sum)) {
                     maxi = Math.max(maxi, i - map.get(sum));
-                } else {
-                    map.put(sum, i);
-                }
-            }
+                } 
+                    map.putIfAbsent(sum, i);
+                            }
         }
         return maxi;
     }

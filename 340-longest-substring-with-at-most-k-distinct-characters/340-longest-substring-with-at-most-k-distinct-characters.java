@@ -1,36 +1,37 @@
 class Solution {
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
-        
-        // This is a bit different
-        // There are 256 ASCII Chars
-        int[] count = new int[256];
+    
+        if(s == null || s.length() == 0 || k == 0 ) return 0;
         
         int i = 0;
         int j = 0;
-        int maxi = Integer.MIN_VALUE;
-        int num = 0;
+        int maxi = 0 ;
         
-        while (j < s.length()) {
+        Map<Character, Integer> map = new HashMap<>();
+        
+        while(j < s.length()) {
             
-            // Added Char for the first time
-            if (count[s.charAt(j)]++ == 0) {
-               
-                num++;
-            }
-                        
-            while (num > k && i < s.length()) {
-                
-            count[s.charAt(i)]--;
-                
-            if (count[s.charAt(i)] == 0){ 
-                num--;
-            }
-                
-            i++; 
+            char c = s.charAt(j);
+            map.put(c, map.getOrDefault(c , 0) + 1);
             
+            while (map.size() > k ) {
+                
+                char d = s.charAt(i);
+                
+                int frequency = map.get(d);
+                
+                if(frequency == 1) {
+                    map.remove(d);
+                } else {
+                    map.put(d, frequency - 1);
+                }
+                
+                i++;
             }
             
+            // At this point map.size() <= k count the maxi
             maxi = Math.max(maxi, j - i + 1);
+            
             j++;
         }
         

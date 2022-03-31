@@ -1,16 +1,27 @@
 class Solution {
     public int missingNumber(int[] nums) {
-      
+        
+        // using Mathematical Sum
+        // Take sum from 0 to N as it contains all from 0 to N
+        int sum = 0;
+        for (int i = 0; i <= nums.length; i++) {
+           sum += i; 
+        }
+        
+        int actual = 0;
+        for(int num:nums) actual += num;
+        
+        return sum - actual;
         // By using XOR -> 0 TO N-1 numbers ideally but 0 to N presernt 
         // which means N is replacing the Missing Number in our 
         
-        int missing  = nums.length;
+//         int missing  = nums.length;
         
-        for(int i = 0; i < nums.length; i++) {
-            missing ^= i ^ nums[i];
-        }
+//         for(int i = 0; i < nums.length; i++) {
+//             missing ^= i ^ nums[i];
+//         }
         
-        return missing;
+//         return missing;
         // Can use HashMap or HashSet as well
         // Fill the HashMap or HashSet and then move from 0 to n ..if absent then we get missing
         

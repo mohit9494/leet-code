@@ -10,7 +10,7 @@ class Solution {
             int y = numbers[j];
             
             if (x + y == target) {
-                return new int[]{i+1 , j+1};
+                return new int[]{i + 1, j + 1};
             } else if (x + y < target) {
                 i++;
             } else {

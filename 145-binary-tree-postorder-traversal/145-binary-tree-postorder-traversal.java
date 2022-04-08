@@ -15,16 +15,25 @@
  */
 class Solution {
     
-    List<Integer> ans = new ArrayList<>();
+    LinkedList<Integer> result = new LinkedList<>();
     
     public List<Integer> postorderTraversal(TreeNode root) {
      
-        if (root == null) return ans;
+        if (root == null) return result;
         
-        postorderTraversal(root.left);
-        postorderTraversal(root.right);
-        ans.add(root.val);
+        Stack<TreeNode> st = new Stack();
+        st.add(root);
         
-        return ans;
+        while(!st.isEmpty()) {
+            
+      TreeNode node = st.pop();
+      result.addFirst(node.val); //add it int the end
+
+      if(node.left != null) st.add(node.left);
+      if(node.right != null) st.add(node.right);
+            
+        }
+        
+        return result;
     }
 }

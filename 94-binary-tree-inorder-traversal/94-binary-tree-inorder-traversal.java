@@ -19,13 +19,34 @@ class Solution {
     
     public List<Integer> inorderTraversal(TreeNode root) {
         
+//         if(root == null) return ans;
+        
+//         inorderTraversal(root.left);
+//         ans.add(root.val);
+//         inorderTraversal(root.right);
+        
+//         return ans;
+        
         if(root == null) return ans;
+        Stack<TreeNode> st = new Stack<>();
         
-        inorderTraversal(root.left);
-        ans.add(root.val);
-        inorderTraversal(root.right);
-        
+        while(true) {
+            
+            if (root != null) {
+                st.add(root);
+                root = root.left;
+            }
+            else {
+               
+                if(st.isEmpty()) break;
+                
+                TreeNode temp = st.pop();                
+                ans.add(temp.val);
+                
+                root = temp.right;
+                
+            }
+        }
         return ans;
-        
     }
 }

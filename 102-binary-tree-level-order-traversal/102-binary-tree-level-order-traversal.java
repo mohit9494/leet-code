@@ -15,36 +15,37 @@
  */
 class Solution {
     
-    List<List<Integer>> result = new ArrayList<List<Integer>>();
+    List<List<Integer>> ans = new ArrayList<>();
     
     public List<List<Integer>> levelOrder(TreeNode root) {
         
-        if(root == null) return result; 
+        // BFS Using Iterative Queue
+        
+        if (root == null) return ans;
         
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         
         while(!q.isEmpty()) {
             
+            int size = q.size();
             List<Integer> subList = new ArrayList<>();
-            int levelNum = q.size();
-          
-            for(int i = 0; i < levelNum; i++) {
+            
+            for(int i = 0; i < size; i++){
                 
                 TreeNode temp = q.poll();
-                if(temp.left != null) q.add(temp.left);
+                subList.add(temp.val);
+                
+                if (temp.left != null) q.add(temp.left);
                 if(temp.right != null) q.add(temp.right);
-                subList.add(temp.val);               
+                
                 
             }
             
-            result.add(subList);
+            ans.add(subList);
             
         }
         
-        
-        
-       return result; 
-        
+        return ans;
     }
 }

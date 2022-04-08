@@ -15,33 +15,16 @@
  */
 class Solution {
     
-    LinkedList<Integer> result = new LinkedList<>();
+    List<Integer> ans = new ArrayList<>();
     
     public List<Integer> postorderTraversal(TreeNode root) {
+     
+        if (root == null) return ans;
         
-        if(root == null) return result;
+        postorderTraversal(root.left);
+        postorderTraversal(root.right);
+        ans.add(root.val);
         
-        // Using LinkedList and AddFirst -> add to the end and then explore => LRN
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode curr = root;
-        stack.push(curr);
-        
-        while(!stack.isEmpty()) {
-         
-            curr = stack.pop();
-            result.addFirst(curr.val);
-            
-            if(curr.left != null) {
-                stack.push(curr.left);
-            }
-            
-             if(curr.right != null) {
-                stack.push(curr.right);
-            }
-            
-        }
-        
-        
-        return result;
+        return ans;
     }
 }

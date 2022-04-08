@@ -15,64 +15,17 @@
  */
 class Solution {
     
-    // LNR
-    
-    List<Integer> result = new ArrayList<Integer>();
+    List<Integer> ans = new ArrayList<>();
     
     public List<Integer> inorderTraversal(TreeNode root) {
         
-        // Morris Traversal
-        TreeNode cur = root;
+        if(root == null) return ans;
         
-        while(cur != null) {
-            
-            if(cur.left == null) {
-               result.add(cur.val);
-                cur = cur.right;
-            } else {
-                TreeNode temp = cur.left;
-                
-                while(temp.right != null && temp.right != cur) {
-                    temp = temp.right;
-                }
-                
-                if(temp.right == null) {
-                    temp.right = cur;
-                    cur = cur.left;
-                } else {
-                    temp.right = null;
-                    result.add(cur.val);
-                    cur = cur.right;
-                }
-            } 
-           
-            
-        }
+        inorderTraversal(root.left);
+        ans.add(root.val);
+        inorderTraversal(root.right);
         
-     /*  if(root == null) return result; 
-        
-       Stack<TreeNode> st = new Stack<>(); 
-        
-        TreeNode node = root;
-        
-        while(true) {
-            
-            if(node!= null) {
-                st.push(node);
-                node = node.left;
-            } else {
-                
-                if(st.isEmpty()) break;
-                
-                node  = st.pop();
-                result.add(node.val);
-                node = node.right;
-                
-            }
-   
-        } */
-        
-        return result;
+        return ans;
         
     }
 }

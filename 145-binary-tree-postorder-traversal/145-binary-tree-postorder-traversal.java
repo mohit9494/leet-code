@@ -15,25 +15,25 @@
  */
 class Solution {
     
-    LinkedList<Integer> result = new LinkedList<>();
+    LinkedList<Integer> ans = new LinkedList<>();
     
     public List<Integer> postorderTraversal(TreeNode root) {
      
-        if (root == null) return result;
+        if (root == null) return ans;
         
         Stack<TreeNode> st = new Stack();
         st.add(root);
         
         while(!st.isEmpty()) {
             
-      TreeNode node = st.pop();
-      result.addFirst(node.val); //add it int the end
-
-      if(node.left != null) st.add(node.left);
-      if(node.right != null) st.add(node.right);
+        TreeNode temp = st.pop();            
+        ans.addFirst(temp.val);
+        
+        if(temp.left != null) st.add(temp.left);
+        if(temp.right != null) st.add(temp.right);
             
         }
         
-        return result;
+        return ans;
     }
 }

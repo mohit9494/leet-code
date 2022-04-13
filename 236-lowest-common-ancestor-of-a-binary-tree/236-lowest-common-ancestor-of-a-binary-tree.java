@@ -10,7 +10,24 @@
 class Solution {
     
     
-    
+    private TreeNode  helper(TreeNode root, TreeNode p, TreeNode q) {
+        
+        if (root == null) return null;
+        
+        if(root.val == p.val || root.val == q.val) return root;
+        
+        TreeNode lf = helper(root.left, p , q);
+        TreeNode rf = helper(root.right, p ,q);
+        
+        if (lf == null && rf == null) return null;
+        
+        if(lf == null) return rf;
+        
+        if(rf == null) return lf;
+        
+        return root;
+        
+    }
     
     private boolean getPath(TreeNode root, TreeNode p, List<TreeNode> l) {
         
@@ -32,22 +49,24 @@ class Solution {
     
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         
-        List<TreeNode> path1 = new ArrayList();
-        List<TreeNode> path2 = new ArrayList();
+        return helper(root, p , q);
         
-        getPath(root, p, path1);
-        getPath(root, q, path2);
+//         List<TreeNode> path1 = new ArrayList();
+//         List<TreeNode> path2 = new ArrayList();
         
-        int min = path1.size() > path2.size() ? path2.size() : path1.size();
+//         getPath(root, p, path1);
+//         getPath(root, q, path2);
         
-        List<TreeNode> test = new ArrayList();
+//         int min = path1.size() > path2.size() ? path2.size() : path1.size();
         
-        for(int i = 0; i < min; i++) {
-            if(path1.get(i).val == path2.get(i).val) test.add(path1.get(i));
-            else break;
-        }
+//         List<TreeNode> test = new ArrayList();
         
-        return test.get(test.size() - 1);
+//         for(int i = 0; i < min; i++) {
+//             if(path1.get(i).val == path2.get(i).val) test.add(path1.get(i));
+//             else break;
+//         }
+        
+//         return test.get(test.size() - 1);
         
     }
 }

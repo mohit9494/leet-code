@@ -34,14 +34,7 @@ class Solution {
         
         if (root == null) return true;
         
-        int lh = getHeight(root.left);
-        int rh = getHeight(root.right);
-        
-        if (lh == -1 || rh == -1) return false;
-        
-        if (Math.abs(lh - rh) > 1) return false;
-        
-        return true;
+       return !(getHeight(root) == -1);
         
         
     }

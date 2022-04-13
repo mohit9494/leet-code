@@ -15,19 +15,14 @@
  */
 class Solution {
     
-    private int getHeight(TreeNode node) {
+    private int getHeight(TreeNode root) {
         
-    if(node == null) return 0;
+        if (root == null) return 0;
         
-    int lh  = getHeight(node.left);
-    if(lh == -1) return -1;
+        int lh = getHeight(root.left);
+        int rh = getHeight(root.right);
         
-    int rh = getHeight(node.right);
-    if(rh == -1) return -1;
-        
-    if(Math.abs(lh - rh) > 1 ) return -1;
-        
-    return 1 + Math.max(lh, rh);        
+        return 1 + Math.max(lh, rh);
         
     }
     
@@ -38,11 +33,14 @@ class Solution {
         int lh = getHeight(root.left);
         int rh = getHeight(root.right);
         
-        if(lh == -1 || rh == -1) return false;
+        if (Math.abs(lh - rh) > 1) return false;
         
-        if(Math.abs(lh - rh) > 1 ) return false;
+        if(!isBalanced(root.left) || !isBalanced(root.right)) {
+            return false;
+        };
         
         return true;
+        
         
     }
 }

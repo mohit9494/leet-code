@@ -23,7 +23,7 @@ public class Codec {
             TreeNode node  = q.poll();
             
             if(node == null) {
-                rs.append("# ");
+            rs.append("# ");
             continue;
             }
             

@@ -29,7 +29,7 @@ class Solution {
         
        while(curr != null) {
            
-          if( !isLeaf(curr)) result.add(curr.val);
+          if(!isLeaf(curr)) result.add(curr.val);
           
           if(curr.left != null) curr = curr.left;
           else curr = curr.right;
@@ -60,13 +60,12 @@ class Solution {
     
     private void addLeaf(TreeNode root) {
         
-        if (isLeaf(root)) {
-            result.add(root.val);
-            return;
-        }
+        if(root == null) return;
         
-        if(root.left != null) addLeaf(root.left);
-        if(root.right != null) addLeaf(root.right);
+        if(isLeaf(root)) result.add(root.val);
+        
+         addLeaf(root.left);
+         addLeaf(root.right);
         
     }
     
@@ -81,7 +80,8 @@ class Solution {
         }
         
         
-        result.add(root.val);        
+        result.add(root.val);
+        
         addLeft(root.left);
         addLeaf(root);
         addRight(root.right);

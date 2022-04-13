@@ -15,27 +15,33 @@
  */
 class Solution {
     
-    int max = 0;
+    int maxi = Integer.MIN_VALUE;
     
-    private int getHeight(TreeNode node) {
+    private int getHeight(TreeNode root) {
         
-        if(node == null) return 0;
+        if (root == null) return 0;
         
-        int lh = getHeight(node.left);
-        int rh = getHeight(node.right);
+        int lh = getHeight(root.left);
+        int rh = getHeight(root.right);
         
-        max = Math.max(max, lh + rh);
+        return 1 + Math.max(lh,rh);
         
-        return 1 + Math.max(lh,rh);        
     }
     
     public int diameterOfBinaryTree(TreeNode root) {
         
-        if(root == null) return 0;
+        if (root == null) return 0;
         
-        getHeight(root);
+        int lh = getHeight(root.left);
+        int rh = getHeight(root.right);
         
-        return max;
+        maxi = Math.max(maxi, lh + rh);
+        
+        diameterOfBinaryTree(root.left);
+        diameterOfBinaryTree(root.right);
+        
+        
+         return maxi;   
         
     }
 }

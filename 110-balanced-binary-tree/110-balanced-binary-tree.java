@@ -34,7 +34,7 @@ class Solution {
         
         if (root == null) return true;
         
-       return !(getHeight(root) == -1);
+       return getHeight(root) != -1;
         
         
     }

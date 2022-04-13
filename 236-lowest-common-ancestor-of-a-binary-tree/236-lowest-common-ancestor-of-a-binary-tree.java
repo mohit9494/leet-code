@@ -19,6 +19,7 @@ class Solution {
         TreeNode lf = helper(root.left, p , q);
         TreeNode rf = helper(root.right, p ,q);
         
+        //If both sides give null then return null
         if (lf == null && rf == null) return null;
         
         if(lf == null) return rf;

@@ -24,6 +24,8 @@ class Solution {
         int lh = getHeight(root.left);
         int rh = getHeight(root.right);
         
+        maxi = Math.max(maxi, lh + rh);
+        
         return 1 + Math.max(lh,rh);
         
     }
@@ -32,14 +34,7 @@ class Solution {
         
         if (root == null) return 0;
         
-        int lh = getHeight(root.left);
-        int rh = getHeight(root.right);
-        
-        maxi = Math.max(maxi, lh + rh);
-        
-        diameterOfBinaryTree(root.left);
-        diameterOfBinaryTree(root.right);
-        
+        getHeight(root);   
         
          return maxi;   
         

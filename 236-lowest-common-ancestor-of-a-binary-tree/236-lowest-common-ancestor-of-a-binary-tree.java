@@ -9,43 +9,29 @@
  */
 class Solution {
     
-    private boolean getPath(TreeNode root, TreeNode t, List<TreeNode> path){
+    
+    
+    
+    private boolean getPath(TreeNode root, TreeNode p, List<TreeNode> l) {
         
         if(root == null) return false;
         
-        path.add(root);
+        l.add(root);
         
-        if(root.val == t.val) return true;
+        if(root.val == p.val) return true;
         
-        boolean lf = getPath(root.left, t, path);
-        boolean rf = getPath(root.right, t, path);
+        boolean lf = getPath(root.left, p, l);
+        boolean rf = getPath(root.right, p , l);
         
         if(lf || rf) return true;
         
-        path.remove(path.size() - 1);
+        l.remove(l.size() - 1);
+        
         return false;
-        
     }
-    
-    private TreeNode helper(TreeNode root, TreeNode p, TreeNode q) {
-        
-        if(root == null) return null;
-        
-        if(root == p || root == q) return root;
-        
-        TreeNode ln = helper(root.left,p,q);
-        TreeNode rn = helper(root.right,p,q);
-        
-        if(ln == null) return rn;
-        else if(rn == null) return ln;
-        else return root; // Got the output
- }
     
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         
-        return helper(root, p,q);
-        
-    /*    //Using Brute Force
         List<TreeNode> path1 = new ArrayList();
         List<TreeNode> path2 = new ArrayList();
         
@@ -54,16 +40,14 @@ class Solution {
         
         int min = path1.size() > path2.size() ? path2.size() : path1.size();
         
-        List<TreeNode> ans = new ArrayList();
+        List<TreeNode> test = new ArrayList();
         
         for(int i = 0; i < min; i++) {
-            
-            if(path1.get(i).val == path2.get(i).val) ans.add(path1.get(i));
+            if(path1.get(i).val == path2.get(i).val) test.add(path1.get(i));
             else break;
-            
         }
         
-        return ans.get(ans.size() - 1); */
+        return test.get(test.size() - 1);
         
     }
 }

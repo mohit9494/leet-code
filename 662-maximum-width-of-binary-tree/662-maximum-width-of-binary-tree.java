@@ -13,61 +13,58 @@
  *     }
  * }
  */
+
+class Tuple {
+    
+    TreeNode node;
+    int i;
+    
+    public Tuple (TreeNode node, int i) {
+        this.node = node;
+        this.i = i;
+    }
+    
+}
+
 class Solution {
     
-    int width = 0;
-    
-    class Tuple{
-        
-    TreeNode node;
-        int num;
-        
-    public Tuple(TreeNode node, int num){
-        this.node = node;
-        this.num = num;
-    }
-        
-        
-    }
-    
+    int maxi = 0;
     
     public int widthOfBinaryTree(TreeNode root) {
         
+        if (root == null) return maxi;
         
-        if(root == null) return width;
-        
-        Queue<Tuple> q = new LinkedList();
-        q.add(new Tuple(root,0));
+        Queue<Tuple> q = new LinkedList<>();
+        q.add(new Tuple(root, 0));
         
         while(!q.isEmpty()) {
             
             int size = q.size();
-            int min = q.peek().num;
-            int first=0;
-            int last=0;
+            int first = 0;
+            int last = 0;
+            int min = q.peek().i;
             
-            for(int i = 0; i< size; i++) {
-                
-                Tuple t = q.poll();
-                TreeNode node = t.node;
-                
-                // calculate id by subtract min from the real val
-                int id = t.num - min;
-                
-                if(i == 0) first = id;
-                if(i == size - 1) last = id;
-                
-                
-                if(node.left != null) q.add(new Tuple(node.left, 2*id + 1));
-                if(node.right != null) q.add(new Tuple(node.right, 2*id + 2));
-            }
+        for(int i = 0; i < size; i++) {
             
-            width = Math.max(width, last - first + 1);
-    
+            Tuple temp = q.poll();
+            TreeNode node = temp.node;
+            int index = temp.i - min; // IMP
+            
+            if(i == 0) first = index;
+            if(i == size - 1) last = index;
+            
+            if(node.left != null) q.add(new Tuple(node.left, index * 2 + 1));
+            if(node.right != null) q.add(new Tuple(node.right, index * 2 + 2));
+                 
+        }
+            
+         maxi = Math.max(maxi, last - first + 1);   
+            
+            
         }
         
+        return maxi;
         
-        return width;
-
+        
     }
 }

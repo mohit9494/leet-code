@@ -28,7 +28,33 @@ class Solution {
         
         if(root == null) return true;
         
-        return isMirror(root.left, root.right);
+        // return isMirror(root.left, root.right);
+        
+        // Using Queue
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        q.add(root);
+        
+        while(!q.isEmpty()) {
+            
+            TreeNode n1 = q.poll();
+            TreeNode n2 = q.poll();
+            
+            if(n1 == null && n2 == null) continue;
+            if(n1 == null || n2 == null) return false;
+            
+            if (n1.val != n2.val) return false;
+            
+             q.add(n1.left);
+             q.add(n2.right);
+            
+             q.add(n1.right);
+             q.add(n2.left);
+            
+            
+        }
+        
+        return true;
         
     }
 }

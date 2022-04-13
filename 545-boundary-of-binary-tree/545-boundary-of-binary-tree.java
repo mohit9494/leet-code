@@ -15,56 +15,58 @@
  */
 class Solution {
     
-    List<Integer> result = new ArrayList();
+    // Add Left, Add Leaf, Add Right in reverse
     
-    public boolean isLeaf(TreeNode root) {
+    LinkedList<Integer> result = new LinkedList<>();
+    
+    private boolean isLeaf(TreeNode root) {
         return root.left == null && root.right == null;
     }
     
-    public void addLeftBoundry(TreeNode root){
+    private void addLeft(TreeNode root) {
         
-        if(root == null) return;
+       TreeNode curr = root;
         
-        while(!isLeaf(root)) {
-            
-            result.add(root.val);
-            
-            if(root.left!= null) root = root.left;
-            else root = root.right;
-            
-        }
+       while(curr != null) {
+           
+          if( !isLeaf(curr)) result.add(curr.val);
+          
+          if(curr.left != null) curr = curr.left;
+          else curr = curr.right;
+           
+       } 
         
-    }
-    
-        public void addRightBoundry(TreeNode root){
-        
-        if(root == null) return;
-            
-        List<Integer> tmp = new ArrayList();
-        
-        while(!isLeaf(root)) {
-            
-            tmp.add(0,root.val);
-            
-            if(root.right!= null) root = root.right;
-            else root = root.left;
-            
-        }
-            
-         for(int i : tmp) result.add(i);   
         
     }
     
-    public void addLeaves(TreeNode root) {
+    private void addRight(TreeNode root) {
         
-        if(root == null) return;
+        TreeNode curr = root;
         
-        if(isLeaf(root)) {
-            result.add(root.val);
+        LinkedList<Integer> subList = new LinkedList();
+        
+        while(curr != null) {
+            
+            if( !isLeaf(curr)) subList.addFirst(curr.val);
+            
+            if(curr.right!= null) curr = curr.right;
+            else curr = curr.left;
+            
         }
         
-        addLeaves(root.left);
-        addLeaves(root.right);
+        for(int i : subList) result.add(i);
+        
+    }
+    
+    private void addLeaf(TreeNode root) {
+        
+        if (isLeaf(root)) {
+            result.add(root.val);
+            return;
+        }
+        
+        if(root.left != null) addLeaf(root.left);
+        if(root.right != null) addLeaf(root.right);
         
     }
     
@@ -72,11 +74,17 @@ class Solution {
         
         if(root == null) return result;
         
-        if(!isLeaf(root)) result.add(root.val);
+        if(isLeaf(root))  {
+            
+            result.add(root.val);
+            return result;
+        }
         
-        addLeftBoundry(root.left);
-        addLeaves(root);
-        addRightBoundry(root.right);
+        
+        result.add(root.val);        
+        addLeft(root.left);
+        addLeaf(root);
+        addRight(root.right);
         
         return result;
         

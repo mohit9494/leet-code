@@ -15,45 +15,26 @@
  */
 class Solution {
     
-  //  PriorityQueue<Integer> q = new PriorityQueue<>((a,b) -> b - a);
-    
     int count = 0;
-    int k_val = 0;
+    int ans = 0;
     
-    private void helper(TreeNode root) {
+    private void helper(TreeNode root, int k) {
         
+        if(root == null) return ;
         
+        // Inorder 
+        helper(root.left, k);
         
-        if (root == null || count == 0) return;
+        count++;
+        if (count == k) ans = root.val;
         
-        helper(root.left);
-        
-        if (count == 0) return ;
-        
-        k_val = root.val;
-         // Add in PQ
-       // q.add(root.val);
-        count--;
-        
-        helper(root.right);
-        
-       
-    
-        
+        helper(root.right, k );
     }
     
     public int kthSmallest(TreeNode root, int k) {
         
-        count = k;
-       
-        helper(root);
-        
-        return k_val;
-        
-       // return q.peek();
-        
+        helper( root,  k);
+        return ans;
         
     }
-    
-    
 }

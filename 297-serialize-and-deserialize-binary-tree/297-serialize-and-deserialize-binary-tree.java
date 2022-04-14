@@ -8,71 +8,72 @@
  * }
  */
 public class Codec {
-
-    StringBuilder rs = new StringBuilder();
+    
+    StringBuilder sb = new StringBuilder();
+    
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         
-        if (root == null) return "#";
+        if(root == null) return "#";
         
         Queue<TreeNode> q = new LinkedList();
         q.add(root);
         
-        while(!q.isEmpty()) {
+        while(!q.isEmpty()){
             
-            TreeNode node  = q.poll();
+            TreeNode temp = q.poll();
             
-            if(node == null) {
-            rs.append("# ");
-            continue;
+            if (temp == null) {
+                sb.append("# ");
+                continue;
             }
             
-            rs.append(node.val + " ");
+            sb.append(temp.val + " ");
             
-            q.add(node.left);
-            q.add(node.right);
-            
+            q.add(temp.left);
+            q.add(temp.right);
             
         }
         
-        
-        return rs.toString();
-        
-        
+        System.out.println(sb);
+        return sb.toString();
     }
+    
+    
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
         
-        String[] vals = data.split(" ");
+        String[] nd = data.split(" ");
+        int index = 0;
         
-        int valIndex = 0;
+        if(nd[index] == "#") return null;
+              
+        System.out.println(Arrays.toString(nd));        
+        Queue<TreeNode> q = new LinkedList();
         
-        if(vals[valIndex].equals("#")) return null;
-        
-        Queue<TreeNode> q = new LinkedList(); 
-        TreeNode root = new TreeNode(Integer.valueOf(vals[0]));
+        TreeNode root = new TreeNode(Integer.valueOf(nd[index]));
         q.add(root);
         
         while(!q.isEmpty()) {
             
-           TreeNode node  = q.poll();
-            String a = vals[++valIndex];
-            String b = vals[++valIndex];
+            TreeNode node = q.poll();
             
-           if(!a.equals("#")) {
-               
-               node.left = new TreeNode(Integer.valueOf(a));
-               q.add(node.left);
-           } 
+            String a = nd[++index];
+            String b = nd[++index];
             
-            if(!b.equals("#")) {
-               
-               node.right = new TreeNode(Integer.valueOf(b));
-               q.add(node.right);
-           } 
+            if(!a.equals("#")) {
+                node.left = new TreeNode(Integer.valueOf(a));
+                q.add(node.left);
+            }
+            
+            if(!b.equals("#")){
+                node.right = new TreeNode(Integer.valueOf(b));
+                q.add(node.right);
+            }
             
         }
+        
         
         return root;
         

@@ -47,7 +47,7 @@ public class Codec {
         String[] nd = data.split(" ");
         int index = 0;
         
-        if(nd[index] == "#") return null;
+        if(nd[index].equals("#")) return null;
               
         System.out.println(Arrays.toString(nd));        
         Queue<TreeNode> q = new LinkedList();

@@ -19,26 +19,40 @@ class BSTIterator {
     // Mintain a pointer to get next
     // Check if array is iterated -> Index == arr.length
     
-    int index = 0;
-    List<Integer> lst = new ArrayList();
+    // int index = 0;
+    // List<Integer> lst = new ArrayList();
     
-    private void inorder(TreeNode root) {
-       
-        if (root == null) return;
-        inorder(root.left);
-        lst.add(root.val);
-        inorder(root.right);
+    Stack<TreeNode> st = new Stack();
+    
+    public void pushAll(TreeNode root) {
+        while(root != null) {
+            st.add(root);
+            root = root.left;
+        }
     }
+    
+//     private void inorder(TreeNode root) {
+       
+//         if (root == null) return;
+//         inorder(root.left);
+//         lst.add(root.val);
+//         inorder(root.right);
+//     }
 
     public BSTIterator(TreeNode root) {
-        inorder(root);}
+        pushAll(root);
+    }
     
     public int next() {
-        return lst.get(index++);
+        TreeNode temp = st.pop();
+        
+        pushAll(temp.right);
+        
+        return temp.val;
     }
     
     public boolean hasNext() {
-        return !(lst.size() == index);
+        return !st.isEmpty();
     }
 }
 

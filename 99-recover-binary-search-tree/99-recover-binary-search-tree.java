@@ -27,7 +27,7 @@ class Solution {
         inorder(root.left);
         
         // Violation -> Process
-        if(root.val < prev.val) {
+        if(prev.val > root.val) {
             
             if(first == null) {
                 // First Violation

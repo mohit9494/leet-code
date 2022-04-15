@@ -15,32 +15,27 @@
  */
 class Solution {
     
-    int ni = 0;
+    int index = 0;
     
-    private TreeNode bstHelper(int[] preorder, int min, int max) {
+    private TreeNode bstHelper(int[] preorder, int min, int max){
         
-        if (ni == preorder.length || 
-            preorder[ni] < min || preorder[ni] > max) return null;
+        if(index == preorder.length || preorder[index] < min || preorder[index] > max) return null;
         
-     int val = preorder[ni++];
+        int val = preorder[index++];
+        TreeNode root = new TreeNode(val);
         
-    TreeNode root = new TreeNode(val);
-     
-    root.left = bstHelper(preorder, min, root.val);
-    root.right = bstHelper(preorder, root.val, max);
+        root.left = bstHelper(preorder, min, root.val);
+        root.right = bstHelper(preorder, root.val, max);
         
-    return root;  
+        return root;        
         
-    }
+}
     
     public TreeNode bstFromPreorder(int[] preorder) {
-        
         
         if(preorder == null) return null;
         
         return bstHelper(preorder, Integer.MIN_VALUE, Integer.MAX_VALUE);
-        
-        
         
     }
 }

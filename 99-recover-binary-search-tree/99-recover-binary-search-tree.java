@@ -19,49 +19,57 @@ class Solution {
     TreeNode middle;
     TreeNode last;
     TreeNode prev;
-    
-    public void inorder(TreeNode root) {
+        
+    private void inorder(TreeNode root) {
         
         if (root == null) return;
         
         inorder(root.left);
         
-        // violation
-        if (root.val < prev.val) {
+        // Violation -> Process
+        if(root.val < prev.val) {
             
-            // first and second violation
             if(first == null) {
+                // First Violation
                 first = prev;
                 middle = root;
             } else {
-                
-             last = root; 
+                // second violation
+                last = root;
             }
             
         }
         
-        prev =  root;
+        prev = root;
+        
         inorder(root.right);
+        
         
     }
     
     public void recoverTree(TreeNode root) {
         
+        if(root == null) return;
+        
         first = middle = last = null;
+        
         prev = new TreeNode(Integer.MIN_VALUE);
         
-        inorder(root);
+        inorder(root);        
         
+        // Swapping the nodes;
         if(first != null && last != null) {
-            int temp = first.val;
+            
+            int t = first.val;
             first.val = last.val;
-            last.val = temp;
+            last.val = t;
             
         } else {
-            int temp = first.val;
+            int t = first.val;
             first.val = middle.val;
-            middle.val = temp;
+            middle.val = t;
         }
+        
         
     }
 }

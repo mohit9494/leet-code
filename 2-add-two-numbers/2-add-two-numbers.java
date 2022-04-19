@@ -12,13 +12,13 @@ class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         
       int carry = 0;
-        int digit = 0;
-        int sum = 0;
         
         ListNode dummy = new ListNode(-1);
         ListNode temp = dummy;
         
       while (l1 != null || l2 != null) {
+          
+          int sum = 0;
           
           if(l1 != null) {
               sum += l1.val;
@@ -32,23 +32,16 @@ class Solution {
           
           sum += carry;
           
-          carry = 0;
-          
-          if(sum >= 10) {
-              carry = sum/10;
-              digit = sum % 10;
-          } else {
-              digit = sum;
-          }
-          
-          sum = 0;
+          carry = sum/10;
           // crete new node
-          ListNode nn = new ListNode(digit);
+          ListNode nn = new ListNode(sum % 10);
           temp.next = nn;
           temp = temp.next;
       }
         
+        // Edge Case
         if(carry > 0)  temp.next = new ListNode(carry);
+        
         return dummy.next;
         
     }

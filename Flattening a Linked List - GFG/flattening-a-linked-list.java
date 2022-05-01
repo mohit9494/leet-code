@@ -142,21 +142,19 @@ class GfG
         return res.bottom; 
     
     }
+    
     Node flatten(Node root)
     {
        
-            if (root == null || root.next == null) 
-                return root; 
-      
-            // recur for list on right 
-            root.next = flatten(root.next); 
-      
-            // now merge 
-            root = mergeTwoLists(root, root.next); 
-      
-            // return the root 
-            // it will be in turn merged with its left 
-            return root; 
+ if(root == null || root.next == null) return root;
+
+// recur for list on right-> last two
+root.next = flatten(root.next);
+
+// Now merge last 2
+root = mergeTwoLists(root, root.next);
+
+return root;
     }
 
 }

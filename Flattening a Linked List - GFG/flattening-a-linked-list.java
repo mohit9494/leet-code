@@ -121,24 +121,27 @@ class GfG
     
     Node mergeTwoLists(Node a, Node b) {
         
-        Node temp = new Node(0);
-        Node res = temp; 
+        // Node temp = new Node(0);
+        // Node res = temp; 
+        
+         Node dummy = new Node(0);
+        Node res = dummy;
         
         while(a != null && b != null) {
+            
             if(a.data <= b.data) {
-                temp.bottom = a; 
-                 
+                dummy.bottom = a;
                 a = a.bottom; 
             }
             else {
-                temp.bottom = b; 
+                dummy.bottom = b; 
                 b = b.bottom; 
             }
             
-            temp = temp.bottom;
+            dummy = dummy.bottom;
         }
         
-        temp.bottom = a == null ? b : a;
+        dummy.bottom = a == null ? b : a;
         return res.bottom; 
     
     }

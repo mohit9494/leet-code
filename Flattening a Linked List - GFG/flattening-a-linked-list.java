@@ -121,11 +121,9 @@ class GfG
     
     Node mergeTwoLists(Node a, Node b) {
         
-        // Node temp = new Node(0);
-        // Node res = temp; 
         
          Node dummy = new Node(0);
-        Node res = dummy;
+         Node res = dummy;
         
          while(a != null && b != null) {
             

@@ -127,7 +127,7 @@ class GfG
          Node dummy = new Node(0);
         Node res = dummy;
         
-        while(a != null && b != null) {
+         while(a != null && b != null) {
             
             if(a.data <= b.data) {
                 dummy.bottom = a;

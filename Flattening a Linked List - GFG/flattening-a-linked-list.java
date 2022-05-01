@@ -125,7 +125,7 @@ class GfG
         Node res = temp; 
         
         while(a != null && b != null) {
-            if(a.data < b.data) {
+            if(a.data <= b.data) {
                 temp.bottom = a; 
                 temp = temp.bottom; 
                 a = a.bottom; 

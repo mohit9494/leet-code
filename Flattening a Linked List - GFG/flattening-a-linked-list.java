@@ -138,8 +138,7 @@ class GfG
             temp = temp.bottom;
         }
         
-        if(a != null) temp.bottom = a; 
-        else temp.bottom = b;
+        temp.bottom = a == null ? b : a;
         return res.bottom; 
     
     }

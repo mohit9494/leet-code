@@ -22,10 +22,9 @@ class Solution {
         }
         
         // Not Pickup the element
-        helper(candidates, target, i + 1, a);       
+        helper(candidates, target, i + 1, a); 
         
-        
-    }
+}
     
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         

@@ -24,7 +24,7 @@ class Solution {
         
         int i = ceilIndex(letters, target);
         
-        if (i >= letters.length) return letters[0];
+        if (i == letters.length) return letters[0];
         
         return letters[i];
     }

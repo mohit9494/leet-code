@@ -1,24 +1,30 @@
-class Solution {
+class Solution {  
     
-    // Both rows and columns are sorted 
-    // Start from the right corner
     public boolean searchMatrix(int[][] matrix, int target) {
         
-      int m = matrix.length; // rows
-      int n = matrix[0].length;  // cols
+        if (matrix.length == 0) return false;
         
-      int i = 0;
-      int j = n-1;
+        int m = matrix.length; //row
+        int n = matrix[0].length; //col
         
-      while(i >= 0 && i < m && j >= 0 && j < n) {
-          
-          int val = matrix[i][j];
-          
-          if (val == target) return true;
-          else if (val > target) j--;
-          else if (val < target) i++;
-          
-      }  
+        // Consider it as a full sorted array witn length m * n - 1 
+        // use binary search
+            
+        int left = 0;
+        int right = m * n - 1 ;
+        
+        while (left <= right) {
+            
+            int mid = left + (right - left)/2;
+            
+            // convert it into row and cols
+            int i = mid / n; // (n * m) / n
+            int j = mid % n;
+            
+            if (matrix[i][j] == target) return true;
+            else if (matrix[i][j] < target) left = mid + 1;
+            else right = mid - 1;
+        }
         
         return false;
     }

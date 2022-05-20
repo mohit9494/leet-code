@@ -1,31 +1,26 @@
-class Solution {  
-    
+class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         
+        // Stair like comparison
         if (matrix.length == 0) return false;
         
-        int m = matrix.length; //row
-        int n = matrix[0].length; //col
+        int m  = matrix.length; //row
+        int n = matrix[0].length; // col
         
-        // Consider it as a full sorted array witn length m * n - 1 
-        // use binary search
+        int i = 0;
+        int j = n-1;
+           
+        while(i >= 0 && i < m && j >= 0 && j < n) {
             
-        int left = 0;
-        int right = m * n - 1 ;
-        
-        while (left <= right) {
+            int val = matrix[i][j];
             
-            int mid = left + (right - left)/2;
+            if(val == target) return true;
+            else if (target < val) j--;
+            else if (target > val) i++;            
             
-            // convert it into row and cols
-            int i = mid / n; // (n * m) / n
-            int j = mid % n;
-            
-            if (matrix[i][j] == target) return true;
-            else if (matrix[i][j] < target) left = mid + 1;
-            else right = mid - 1;
         }
-        
+            
         return false;
+        
     }
 }

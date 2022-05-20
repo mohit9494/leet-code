@@ -6,21 +6,26 @@ class Solution {
         
         int m  = matrix.length; //row
         int n = matrix[0].length; // col
-        
-        int i = 0;
-        int j = n-1;
            
-        while(i >= 0 && i < m && j >= 0 && j < n) {
+        int left = 0;
+        int right = m * n - 1;
+        
+        while(left <= right) {
+            
+            int mid = left + (right - left)/2;
+            
+            //calculate row and col from mid
+            int i = mid / n;
+            int j = mid % n;
             
             int val = matrix[i][j];
             
-            if(val == target) return true;
-            else if (target < val) j--;
-            else if (target > val) i++;            
+            if (val == target) return true;
+            else if (val < target) left = mid + 1;
+            else right = mid - 1;
             
         }
-            
-        return false;
         
+        return false;
     }
 }

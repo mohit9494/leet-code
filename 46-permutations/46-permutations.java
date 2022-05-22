@@ -2,39 +2,35 @@ class Solution {
     
     List<List<Integer>> ans = new ArrayList<>();
     
-    private void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
-    
-    public void getPermute(int[] nums, int index){
+    private void helper(int[] nums, List<Integer> ds, Set<Integer> set) {
         
-       
+        if (ds.size() == nums.length) {
+            ans.add(new ArrayList<>(ds));
+            return ;
+        }
         
-        if(index >= nums.length) {
-            
-            List<Integer> ds = new ArrayList<>();
-            
-            for(int i : nums) ds.add(i);
-            ans.add(ds);
-            return;
-        }
-            
-        for(int i = index; i < nums.length; i++) {
-            
-            // swap numbers for i to end with index;
-            swap(nums, index, i);
-            getPermute(nums, index + 1); // This is IMP
-            swap(nums, index, i); // reswap it to cater backtracking
-            
-        }
- 
-         }
-    
+        for(int i = 0; i < nums.length; i++) {
+         
+            if (!set.contains(nums[i])){
+                
+            set.add(nums[i]);
+            ds.add(nums[i]);
+                
+            helper(nums, ds, set);
+                
+            set.remove(nums[i]);
+            ds.remove(ds.size() - 1);
+                
+            }
+           
+        }        
+        
+    }    
     public List<List<Integer>> permute(int[] nums) {
         
-        getPermute(nums, 0);
+        helper(nums, new ArrayList<>(), new HashSet<>());
+        
         return ans;
+        
     }
 }

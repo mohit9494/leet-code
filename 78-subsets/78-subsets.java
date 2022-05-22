@@ -1,29 +1,30 @@
 class Solution {
     
-    List<List<Integer>> ans = new ArrayList<>();
+    // Subset -> SubSequence
+    List<List<Integer>> ans=  new ArrayList<>();
     
-    private void subsetFinder(int[] nums, List<Integer> ds, int index){
+    private void helper(int[] arr, int i, List<Integer> ds) {
         
-        if(index >= nums.length) {
+        // Base Condition
+        if (i == arr.length) {
             ans.add(new ArrayList<>(ds));
-            return;
+            return ;
         }
         
-        // pickup
-        ds.add(nums[index]);
-        subsetFinder(nums, ds, index + 1);
-        
-        // NotPickup
+        // Pick the element
+        ds.add(arr[i]);
+        helper(arr, i + 1, ds);
         ds.remove(ds.size() - 1);
-        subsetFinder(nums, ds, index + 1);
+        
+        // Not pick the element
+        helper(arr, i + 1, ds);
         
     }
     
-    
     public List<List<Integer>> subsets(int[] nums) {
         
-        subsetFinder(nums, new ArrayList<>(), 0);
-        return ans;
+        helper(nums, 0, new ArrayList<Integer>());
         
+        return ans;
     }
 }

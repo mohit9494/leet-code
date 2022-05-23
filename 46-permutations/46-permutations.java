@@ -2,24 +2,32 @@ class Solution {
     
     List<List<Integer>> ans = new ArrayList<>();
     
-    private void helper(int[] nums, List<Integer> ds, Set<Integer> set) {
+    private void swap(int[] nums, int i, int j) {
         
-        if (ds.size() == nums.length) ans.add(new ArrayList<>(ds));
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
         
-       for (int i = 0 ; i< nums.length; i++) {
+    }
+    
+    private void helper(int[] nums, int index) {
+        
+        if (index >= nums.length) {
+            
+            List<Integer> tmp = new ArrayList<>();
+            
+            for (int i : nums) tmp.add(i);
+            ans.add(tmp);            
+            return;
+        }
+        
+       for (int i = index ; i< nums.length; i++) {
            
-           if(!set.contains(nums[i])) {
-               
-               set.add(nums[i]);
-               ds.add(nums[i]);
-               
-               helper(nums, ds, set);
-               
-               set.remove(nums[i]);
-               ds.remove(ds.size() - 1);
-               
-           }
+           swap(nums, index, i);
            
+           helper(nums, index + 1);
+           
+           swap(nums, index, i);
            
        } 
         
@@ -27,7 +35,7 @@ class Solution {
     
     public List<List<Integer>> permute(int[] nums) {
         
-        helper(nums, new ArrayList<>(), new HashSet<>());
+        helper(nums,0);
         
         return ans;
         

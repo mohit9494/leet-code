@@ -25,8 +25,7 @@ class Solution {
             ds.remove(ds.size() - 1);
             map.put(num, count);
             
-        }
-        
+        }        
         
     }
      

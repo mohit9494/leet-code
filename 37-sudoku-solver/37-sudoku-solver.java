@@ -39,8 +39,10 @@ class Solution {
                             board[i][j] = c;
                             
                             boolean flag = solve(board);
+                            
                             if (flag) return true; // Got the only answer needed
-                            else board[i][j] = '.'; // else restore                            
+                            
+                             board[i][j] = '.'; // else restore                            
                             
                         }                       
                         

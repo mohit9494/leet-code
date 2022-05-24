@@ -7,7 +7,14 @@ class Solution {
             if(board[row][i]  == c) return false;
             
             if(board[i][col] == c) return false;
-            if(board[ 3 * (row/3) + i/3][3 * (col/3) + i%3] == c) return false;
+            
+            int rowBlock = 3 * (row/3);
+            int colBlock = 3 * (col/3);
+            
+            int rowPos = rowBlock + (i/3);
+            int colPos = colBlock + (i % 3);
+            
+            if(board[rowPos][colPos] == c) return false;
         }
         
      return true; 

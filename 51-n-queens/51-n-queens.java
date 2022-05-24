@@ -2,65 +2,64 @@ class Solution {
     
     List<List<String>> ans = new ArrayList<>();
     
-    private List<String> construct(char[][] board) {
+    public void solve(int col, char[][] board, int[] leftRow, int[] ud, int[] ld) {
         
-        List<String> res = new ArrayList<>();
+        int n = board.length;
         
-        for(char[] r : board) res.add(new String(r));
-        
-        return res;
-    }
-    
-    private void solve(int col, char[][] board, int[] leftRow, int[] ud, int[] ld){
-        
-        if(col >= board.length){
-            ans.add(construct(board));
+        if (col >= n) {
+            
+            List<String> res = new ArrayList<>();
+            
+            // Convert char array to String and add in list
+            for(char[] c : board) res.add(new String(c));
+            
+            // Add res in final answer
+            ans.add(res);
             return;
         }
         
-        for (int row = 0; row < board.length; row++) {
+        for (int row = 0; row < n; row++) {
             
-            if(leftRow[row] == 0 &&
-              ld[row + col] == 0 &&
-              ud[board.length - 1 + col - row] == 0) {
+            if (leftRow[row] == 0 && 
+                ud[row + col] == 0 && 
+                ld[n - 1 + col - row] == 0) {
+              
+             board[row][col] = 'Q';   
+             leftRow[row] = 1;
+             ud[row + col] = 1;
+             ld[n - 1 + col - row] = 1;
                 
-                board[row][col] = 'Q';
-                leftRow[row] = 1;
-                ld[row + col] = 1;
-                ud[board.length - 1 + col - row] = 1;
+            solve(col + 1, board, leftRow, ud, ld);
                 
-                solve(col + 1, board, leftRow, ud, ld);
+             board[row][col] = '.';   
+             leftRow[row] = 0;
+             ud[row + col] = 0;
+             ld[n - 1 + col - row] = 0;
                 
-                board[row][col] = '.';
-                leftRow[row] = 0;
-                ld[row + col] = 0;
-                ud[board.length - 1 + col - row] = 0;
-                
-            }
-            
+            }            
             
         }
         
-    }     
+    }
     
     public List<List<String>> solveNQueens(int n) {
         
-        // Create a board
+        // Create the board
         char[][] board = new char[n][n];
+        
         for(int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 board[i][j] = '.';
             }
         }
         
-    // validators
-    int[] leftRow = new int[n];
-    int[] upperDiagonal = new int[2*n - 1];
-    int[] lowerDiagonal = new int[2 * n - 1];
+        // validators
+        int[] leftRow = new int[n];
+        int[] ud = new int[2 * n - 1];
+        int[] ld = new int[2 * n - 1];
         
-    solve(0, board, leftRow, upperDiagonal, lowerDiagonal);
-    
-    return ans;
+        solve(0, board, leftRow, ud, ld);
         
+        return ans;
     }
 }

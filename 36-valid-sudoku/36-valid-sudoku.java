@@ -29,9 +29,6 @@ class Solution {
                 if (board[i][j] != '.') {
                     
                     char c = board[i][j];
-                    System.out.println(c);
-                    System.out.println(i);
-                    System.out.println(j);
                     
                     // Before validation make that spot Blank
                     board[i][j] = '.';

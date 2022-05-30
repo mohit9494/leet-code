@@ -4,13 +4,13 @@ class Solution {
     
     Map<String, List<String>> map = new HashMap<>();
     
-    private int generateValue(String s){
+    private String generateKey(String s){
         
-        int val = 0;
+        char[] ca = new char[26];
         
-        for (char c : s.toCharArray()) val += c - 'a' ;
+        for (char c : s.toCharArray()) ca[c - 'a']++ ;
         
-        return val;
+        return String.valueOf(ca);
         
     }
     
@@ -30,7 +30,10 @@ class Solution {
         for (String s : strs) {
             
          // sort each String and use it as a key
-            String key = sortString(s);  
+         //   String key = sortString(s);  
+           
+            // Generate Key
+            String key = generateKey(s);
             
             if (!map.containsKey(key)) map.put(key, new ArrayList<>());
             

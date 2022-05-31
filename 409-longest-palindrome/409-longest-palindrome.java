@@ -14,8 +14,6 @@ class Solution {
            count = count + ((i/2) * 2);
         }
         
-        System.out.println(count);
-        
         // Handling odd occurances
         return count == s.length() ? count : count + 1;
         

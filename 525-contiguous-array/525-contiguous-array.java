@@ -18,7 +18,7 @@ class Solution {
             
             if (sum == k) {
                 // Handling the edge case
-                maxi = Math.max(maxi, i + 1);
+                maxi = i + 1;
             } else {
                 
                 // sum != k

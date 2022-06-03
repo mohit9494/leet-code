@@ -22,7 +22,8 @@ class Solution {
         for (int i = 1; i < dp.length; i++){
             for (int j = 1; j < dp[0].length; j++) {
                 
-                // here i => coin
+                // here coins[i - 1] => why -1 ?
+                // because we added 1 dummy row as 0 first
                 // j => amount
                 if (j < coins[i - 1]) {
                  dp[i][j] = dp[i - 1][j];   
@@ -36,6 +37,6 @@ class Solution {
           
          int ans = dp[r][c]; 
         
-        return ans == amount + 1 ? -1 : ans;
+        return ans >= amount + 1 ? -1 : ans;
     }
 }

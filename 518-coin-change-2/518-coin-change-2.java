@@ -12,12 +12,10 @@ class Solution {
         // Keep in mind that you are counting total number of Ways not coins -> 
         // sum the ways at node junction
                 
-        for (int i = 0; i < dp.length; i++) {
-            dp[i][0] = 1;
-        }
-        
+        dp[0][0] = 1;
+                
         for (int i = 1; i < dp.length; i++) {
-            for (int j = 1; j < dp[0].length; j++) {
+            for (int j = 0; j < dp[0].length; j++) {
              
                 // If the amount < than the coin denomination
                 if (j < coins[i - 1]) {

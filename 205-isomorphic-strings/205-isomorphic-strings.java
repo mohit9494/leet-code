@@ -8,13 +8,10 @@ class Solution {
         
         for(int i = 0; i < s.length(); i++) {
             
-            char a = s.charAt(i);
-            char b = t.charAt(i);
+            if (sChar[s.charAt(i)] != tChar[t.charAt(i)]) return false;
             
-            if (sChar[a] != tChar[b]) return false;
-            
-            sChar[a] = i + 1;
-            tChar[b] = i + 1;
+            sChar[s.charAt(i)] = i + 1;
+            tChar[t.charAt(i)] = i + 1;
         }
         return true;
     }

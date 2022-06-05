@@ -3,16 +3,28 @@ class Solution {
         
         if (s.length() != t.length()) return false;
         
-        int[] sChar = new int[256];
-        int[] tChar = new int[256];
+        Map<Character, Character> map = new HashMap<>();
+        Set<Character> set = new HashSet<>();
         
         for(int i = 0; i < s.length(); i++) {
+           
+            char c = s.charAt(i);
+            char d = t.charAt(i);
             
-            if (sChar[s.charAt(i)] != tChar[t.charAt(i)]) return false;
+            if(map.containsKey(c)) {
+                if( !map.get(c).equals(d)) return false;
+            } else {
+                
+                if (set.contains(d)) return false;
+                
+               map.put(c, d);
+              set.add(d);
+                
+            }
+    
             
-            sChar[s.charAt(i)] = i + 1;
-            tChar[t.charAt(i)] = i + 1;
         }
+        
         return true;
     }
 }

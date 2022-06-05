@@ -26,8 +26,6 @@ class Solution {
             
         }
         
-        System.out.println(Arrays.deepToString(dp));
-        
         int ans = Integer.MAX_VALUE;
         
         // Get the min from the first row

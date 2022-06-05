@@ -1,9 +1,12 @@
 class Solution {
     
     private String generateKey(String s) {
-        char[] c = s.toCharArray();
-         Arrays.sort(c);
-        return String.valueOf(c);
+        
+    char[] ca = new char[26];
+
+    for (char c : s.toCharArray()) ca[c - 'a']++ ;
+
+    return String.valueOf(ca);
 }
     
     public List<List<String>> groupAnagrams(String[] strs) {

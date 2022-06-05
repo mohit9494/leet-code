@@ -22,8 +22,6 @@ class Solution {
            
          }
         
-        System.out.println(map);
-        
         // Get result from map
         for(List<String> ls : map.values()) ans.add(ls);
         

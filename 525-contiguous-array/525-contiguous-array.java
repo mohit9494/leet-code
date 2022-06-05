@@ -1,39 +1,41 @@
 class Solution {
-    // This is like longest sunstring with sum k
-    // Here the k = 0 if we consider the 0 index occurance to be -1 for sum
-    // If sum K = 0 we found our subarray
     public int findMaxLength(int[] nums) {
+        
+        int ans = 0;
+        
+        if (nums == null || nums.length == 0) return ans;
         
         int sum = 0;
         int k = 0;
-        int maxi = 0;
         
         Map<Integer, Integer> map = new HashMap<>();
         
-        // we have to calculate the longest subarray
         for (int i = 0; i < nums.length; i++) {
+        
+            int element = nums[i];
             
-            if (nums[i] == 0) sum--;
-            else sum++;
-            
-            if (sum == k) {
-                // Handling the edge case
-                maxi = i + 1;
+            if (element == 0) {
+                sum += -1;
             } else {
-                
-                // sum != k
-                // Lets check if we have sum - k in our map
-                if(map.containsKey(sum - k)) {
-                    maxi = Math.max(maxi, i - map.get(sum - k));
-                }
-                
+                sum += 1;
             }
             
-            // Just put the first occurance of every sum with index
-            // Because we have to calculate the longest subarray
-            map.putIfAbsent(sum, i);
+            // Now process
+            if(sum == k) {
+                ans = i + 1;
+            } else {
             
+            if (map.containsKey(sum - k)) {
+                ans = Math.max(ans, i - map.get(sum - k));
+            }
+            
+            // put the first instance only
+            map.putIfAbsent(sum, i);
+                
+            }
         }
-        return maxi;
+        
+        return ans;
+        
     }
 }

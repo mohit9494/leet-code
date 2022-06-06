@@ -6,8 +6,6 @@ class Solution {
         
         if (n == 1) return nums[0];
         
-        int[] dp = new int[n];
-        
         // Initialize the dp array
         // we need (i - 2) amount so we need to initialize first 2 places
         int prev = nums[0];

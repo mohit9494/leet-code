@@ -1,29 +1,23 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         
-        int[] ans = new int[nums.length];        
+        int[] ans = new int[nums.length];
         
-        // calculate Left product
-        int[] lp = new int[nums.length];
+        if(nums == null || nums.length == 0) return ans;
         
-        // Calculate Right Product
-        int[] rp = new int[nums.length];
+        // Calculate the Left Side product using ans array
+        ans[0] = 1;
         
-        for(int i = 0; i < nums.length; i++) {
-            if (i == 0) lp[i] = 1;
-            else lp[i] = lp[i - 1] * nums[i - 1];
+        for(int i = 1; i < nums.length; i++) {
+            ans[i] = ans[i - 1] * nums[i - 1];
         }
         
-        for(int i = nums.length - 1; i >= 0 ; i--) {
-            if (i == nums.length - 1) rp[i] = 1;
-            else rp[i] = rp[i + 1] * nums[i + 1];
-        }
-     
-        // System.out.println(Arrays.toString(lp));
-        // System.out.println(Arrays.toString(rp));
+        // Getting right side product on the fly
+        int r = 1;
         
-        for (int i = 0; i < nums.length; i++) {
-            ans[i] = lp[i] * rp[i];
+        for(int i = nums.length - 1; i >= 0; i--) { 
+            ans[i] = ans[i] * r;
+            r = r * nums[i];
         }
         
         return ans;

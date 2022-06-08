@@ -42,8 +42,5 @@ class Solution {
                 
             }
         }
-        
-        System.out.println(Arrays.deepToString(ca));
-        System.out.println(Arrays.deepToString(board));
     }
 }

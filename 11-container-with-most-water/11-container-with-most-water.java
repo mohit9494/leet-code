@@ -4,6 +4,7 @@ class Solution {
         int maxArea = Integer.MIN_VALUE;
         
         // Finalize the max width
+        // we need to get Max Height
         int i = 0;
         int j = height.length - 1;
         

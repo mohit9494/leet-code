@@ -9,7 +9,7 @@ class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {        
                 
         int i = 0;
-        int j = 0;
+        int j = m + n - 1;
         
         // No second array
         if (n == 0) return;
@@ -22,33 +22,22 @@ class Solution {
             return;
         }
         
-        while (i < m) {
-            
-            if (nums1[i] <= nums2[j]) {
-                i++;
-            } else {
-                //swap i and j;
-                int temp = nums1[i];
-                nums1[i] = nums2[j];
-                nums2[j] = temp;
-                
-                // Reposition jth element in nums2;
-                while (j < n-1 && nums2[j] > nums2[j + 1]) {
-                    swap(nums2, j, j+1);
-                    j++;
-                }
-                
-                j = 0;
-                
-            }
-    
+        int n1 = m - 1;
+        int n2 = n - 1;
+        
+        // compare n1 and n2
+        while (j >= 0 && n1 >= 0 && n2 >= 0) {
+        if (nums1[n1] > nums2[n2]) {
+            nums1[j--] = nums1[n1--];
+        } else {
+            nums1[j--] = nums2[n2--];
+        }
         }
         
-        // copy all from nums2 to nums1
-
-        for (int k = i; k < nums1.length; k++) {
-            nums1[k] = nums2[k - i];
+        if(n1 < 0) {
+            while (j >= 0) nums1[j--] = nums2[n2--];
         }
+        
             
    
     }

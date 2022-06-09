@@ -26,7 +26,7 @@ class Solution {
         int n2 = n - 1;
         
         // compare n1 and n2
-        while ( n1 >= 0 && n2 >= 0) {
+        while (n1 >= 0 && n2 >= 0) {
         if (nums1[n1] > nums2[n2]) {
             nums1[j--] = nums1[n1--];
         } else {

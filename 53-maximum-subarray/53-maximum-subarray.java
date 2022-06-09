@@ -12,11 +12,9 @@ class Solution {
             maxi = Math.max(maxi, sum);
             
             // Kadane's
-            if(sum < 0) sum = 0;
-            
+            if (sum < 0) sum = 0;                  
         }
         
-        return maxi;
-        
+        return maxi;        
     }
 }

@@ -1,14 +1,7 @@
 class Solution {
     
-    private void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
-    
     public void merge(int[] nums1, int m, int[] nums2, int n) {        
-                
-        int i = 0;
+
         int j = m + n - 1;
         
         // No second array
@@ -16,6 +9,7 @@ class Solution {
         
         if (m == 0) {
             //copy all from second to first;
+            int i = 0;
             for (int element : nums2) {
                 nums1[i++] = element;
             }
@@ -34,11 +28,10 @@ class Solution {
         }
         }
         
+        // One of them is less than zero...if its n2 just ignore..if n1 then move n2 into n1
         if(n1 < 0) {
-            while (j >= 0) nums1[j--] = nums2[n2--];
-        }
-        
-            
+            while (n2 >= 0) nums1[j--] = nums2[n2--];
+        }       
    
     }
 }

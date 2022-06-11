@@ -3,6 +3,8 @@ class Solution {
         
         int k = 2;
         
+        if (nums.length < k) return nums.length;
+        
         int i = 1, j = 1, count = 1;
         
         while (j < nums.length) {

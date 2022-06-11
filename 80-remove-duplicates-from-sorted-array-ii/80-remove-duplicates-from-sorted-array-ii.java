@@ -5,25 +5,25 @@ class Solution {
         
         if (nums.length < k) return nums.length;
         
+        // Initialization
         int i = 1, j = 1, count = 1;
         
         while (j < nums.length) {
             
-          if (nums[j] == nums[j - 1]) {
-              count++;
-          } else {
-              count = 1;
-          }
-            
-            // Check count
-            if (count <= k ) {
-                // move i with j
-                nums[i++] = nums[j];
+            if (nums[j] == nums[j - 1]) {
+                count++;
+            } else {
+                // Reset the count
+                count = 1;
             }
+            
+            // check the count at present and move the i pointer which is slow with j
+            if (count <= k) {
+                nums[i++] = nums[j];
+            }           
             
             j++;
         }
-        
         return i;
     }
 }

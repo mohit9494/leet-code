@@ -1,22 +1,20 @@
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         
-        // Use StairLike Comparison
-        if (matrix.length == 0) return false;
-        
         int m = matrix.length;
+        if (m == 0) return false;
         int n = matrix[0].length;
         
-        int i = 0;
-        int j = n-1;
+        int i = 0, j = n - 1;
         
-        while (i >= 0 && i < m && j>= 0 && j < n) {
+        while (i < m && j >= 0) {
             
-         int val = matrix[i][j];   
-        
-         if (val == target) return true;
-            else if (val < target) i++;
-            else  if (val > target) j--;            
+            int num = matrix[i][j];
+            
+            if (num == target) return true;
+            else if (num < target) i++;
+            else j--;
+            
         }
         
         return false;

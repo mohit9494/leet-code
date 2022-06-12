@@ -3,7 +3,7 @@ class Solution {
         
         int k = 2;
         
-        if (nums.length < k) return nums.length;
+        if (nums.length <= k) return nums.length;
         
         // Initialization
         int i = 1, j = 1, count = 1;

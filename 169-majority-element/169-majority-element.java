@@ -1,27 +1,27 @@
 class Solution {
     public int majorityElement(int[] nums) {
         
+        // cancel each other algo
         int count = 0;
         int i = 0;
         int element = 0;
         
         while (i < nums.length) {
-          
+            
             if (count == 0) {
-                // Take the current element since everyone cancelled each other
-                element = nums[i];
+                // everything is cancelled // balance condition // no majority
+                element = nums[i];                
             }
             
             if (element == nums[i]) {
-                // Increase the count if same element is present
+                // same element // Increase the count
                 count++;
             } else {
-                // decrease the count as other element is there
                 count--;
             }
+            
             i++;
         }
-        
         return element;
     }
 }

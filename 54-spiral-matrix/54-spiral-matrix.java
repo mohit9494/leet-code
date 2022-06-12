@@ -1,39 +1,46 @@
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
         
-        List<Integer> ans = new ArrayList<>();
-        
-        if(matrix == null || matrix.length == 0) return ans;
-        
         int m = matrix.length;
         int n = matrix[0].length;
         
-        int left = 0, right = n - 1;
-        int top = 0, bottom = m - 1;
+        List<Integer> ans = new ArrayList<>();
         
-        while(left <= right && top <= bottom) {
-         
-        // Traverse left -> right
-        for(int j = left; j <= right; j++) ans.add(matrix[top][j]);
-        top++;
-        if(top > bottom) break;
+        int top = 0;
+        int bottom = m - 1;
+        int left = 0;
+        int right = n - 1;
+        
+       // This is continuous process
+    
+        while (top <= bottom && left <= right) {
             
-        // Go top to bottom
-        for(int i = top; i <= bottom; i++) ans.add(matrix[i][right]);
+         // Left ------> Right   
+          for (int i = left; i <= right; i++) {
+              ans.add(matrix[top][i]);
+          } 
+          top++;
+          if (bottom < top) break;
+          
+        // top -------> bottom
+        for (int i = top; i <= bottom; i++) {
+            ans.add(matrix[i][right]);
+        }
         right--;
         if(right < left) break;
         
-        // Go right - left
-        for(int j = right; j >= left; j--) ans.add(matrix[bottom][j]);
-        bottom--;        
-        if(bottom < top) break;
+        // right --------> left
+        for (int i = right; i >= left; i--) ans.add(matrix[bottom][i]);
+        bottom--;
+        if (bottom < top) break;
         
-        // go bottom to top
-        for(int i = bottom; i>= top; i--) ans.add(matrix[i][left]);
+        // bottom -------> top
+        for (int i = bottom; i >= top; i--) ans.add(matrix[i][left]);
         left++;
+        if (right < left) break;
             
-        }        
+        }
         
-       return ans; 
+        return ans;
     }
 }

@@ -5,45 +5,47 @@ class Solution {
         int n = mat[0].length;
         
         int[] ans = new int[m * n];
-  
-        int row = 0;
-        int col = 0;
-        int z = 0;
         
+        int z = 0;
+        int i = 0, j = 0;
         boolean up = true;
         
-        while(row < m && col < n) {
-            
-            if(up) {
-                
-                while(row > 0 && col < n - 1) {
-                    ans[z++] = mat[row--][col++];
+        while (i < m && j < n) {
+           
+            if (up) {
+              
+                // decrease the row increase the col
+                while (i > 0 && j < n - 1) {
+                    ans[z++] = mat[i--][j++];
                 }
                 
-                // Hit the first row  or last column
-                ans[z++] = mat[row][col];
+                // here i = 0 or j = n -1 or both
+                ans[z++] = mat[i][j];
                 
-                if (col == n-1) row++;
-                else col++; // If last col then move to next row
+                // move forward
+                if (j == n-1) i++;
+                else if (i == 0) j++;
                 
             } else {
-                // If moving in down direction
-                while(row < m - 1 && col > 0) {
-                    ans[z++] = mat[row++][col--];
+                
+                // Going down
+                // Increase the row  and decrese the cols
+                while (i < m-1 && j > 0) {
+                    ans[z++] = mat[i++][j--];
                 }
-                // you reached last row or first col
-                ans[z++] = mat[row][col];
-                if(row == m-1) col++;
-                else row++;
+                
+                // Hit the last
+                ans[z++] = mat[i][j];
+                
+                // Move forward
+                if (i == m-1) j++;
+                else if (j == 0) i++;
+                
             }
-            
             
             up = !up;
         }
         
-
-        
         return ans;
-        
     }
 }

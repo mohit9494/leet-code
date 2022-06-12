@@ -1,9 +1,8 @@
 class Solution {
     public int maxArea(int[] height) {
         
-        int maxi = Integer.MIN_VALUE;
-    
-    int i = 0, j = height.length - 1;
+        int maxi = Integer.MIN_VALUE;    
+        int i = 0, j = height.length - 1;
     
     while(i < j) {
         

@@ -9,9 +9,9 @@ class Solution {
         // Generate Right product Dianamically
         int r = 1;
         
-        for (int i = nums.length - 1; i >= 0; i--) {
-            ans[i] = ans[i] * r;
-            r = r * nums[i];
+        for (int k = nums.length - 1; k >= 0; k--) {
+            ans[k] = ans[k] * r;
+            r = r * nums[k];
         }
       
         return ans;  

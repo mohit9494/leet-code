@@ -2,26 +2,27 @@ class Solution {
     
     List<List<Integer>> ans = new ArrayList<>();
     
-    private void helper(int[] nums, int i, List<Integer> ds) {
+    private void helper(int[] nums, int index, List<Integer> ds) {
         
-        if (i >= nums.length) {
+        if (index == nums.length) {
             ans.add(new ArrayList<>(ds));
             return;
         }
         
-        // Pick the num
-        ds.add(nums[i]);
-        helper(nums, i + 1, ds);
+        // pick and non-pick
+        ds.add(nums[index]);
+        helper(nums, index + 1, ds);
         ds.remove(ds.size() - 1);
         
-        helper(nums, i + 1, ds);
-        
+        // Non Pick
+        helper(nums, index + 1, ds);
         
     }
     
     public List<List<Integer>> subsets(int[] nums) {
         
         helper(nums, 0, new ArrayList<>());
+        
         return ans;
     }
 }

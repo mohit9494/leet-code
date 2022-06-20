@@ -17,27 +17,28 @@ class Solution {
     
     List<List<Integer>> ans = new ArrayList<>();
     
-    private void helper(TreeNode root, int targetSum, List<Integer> ds){
+    private void pathBuilder(TreeNode root, int targetSum, List<Integer> ds) {
         
-        if (root == null) return;      
+        if(root == null) return;
         
+        // use the root value
+        targetSum -= root.val;
         ds.add(root.val);
-        targetSum = targetSum - root.val;
         
-        // check if its a leaf node
-        if(root.left == null && root.right == null) {
-            
+        // check if its a root node
+        if (root.left == null && root.right == null) {
             if (targetSum == 0) {
-                 ans.add(new ArrayList<>(ds));
+                // You got the perfect path Now !
+                ans.add(new ArrayList<>(ds));
             }
-            
         }
         
-        helper(root.left, targetSum, ds);    
-        helper(root.right, targetSum, ds);
-        
-        // Remove the last added element
-         ds.remove(ds.size() - 1);
+        // Go left and right
+        pathBuilder(root.left, targetSum, ds);
+        pathBuilder(root.right, targetSum, ds);
+            
+        // BackTracking
+        ds.remove(ds.size() - 1);
         
         
     }
@@ -46,9 +47,8 @@ class Solution {
         
         if (root == null) return ans;
         
-        helper(root, targetSum, new ArrayList<>());
+        pathBuilder(root, targetSum, new ArrayList<Integer>());        
         
         return ans;
-        
     }
 }

@@ -1,29 +1,28 @@
 class Solution {
     
+    private int helper(int n, int[] cost, int[] dp) {
+        
+        if (n < 0) return 0;
+        
+        // Base :: I cam start from index 0 or index 1
+        if ( n == 0 || n == 1) return cost[n];
+        
+        // check dp array
+        if (dp[n] != -1) return dp[n];
+        
+        
+        // I need to pay at n
+        return dp[n] = cost[n] + Math.min(helper(n - 1, cost, dp), helper(n - 2, cost, dp));
+    }
+    
     public int minCostClimbingStairs(int[] cost) {
         
-        // top of floor is beyond array
-        // u only pay till step i then from i jump 1 or 2
         int n = cost.length;
-        // int[] dp = new int[n + 1];
+        int[] dp = new int[n + 1];
         
-        // Initialize dp array
-        int a = cost[0];
-        int b = cost[1];
+        Arrays.fill(dp, -1);
         
-        // here we need to reach n
-        // to get there we need to pay toll till either n - 1 or n - 2 :: from there we can jump 1 or 2 steps for free
-        // and we will reach n
-        //now get the mimimum to reach n - 1 or n-2;
-        
-        for (int i = 2; i < n; i++) {
-            int c = cost[i] + Math.min(a, b);
-            a = b;
-            b = c;
-        }
-        
-        // calculating the naswer for nth destination
-        return Math.min(a, b);
+        return Math.min(helper(n - 1, cost, dp), helper(n - 2, cost, dp));
         
     }
 }

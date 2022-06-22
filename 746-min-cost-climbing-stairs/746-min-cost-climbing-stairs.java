@@ -2,7 +2,7 @@ class Solution {
     
     private int helper(int n, int[] cost, int[] dp) {
         
-        if (n < 0) return 0;
+        // if (n < 0) return 0;
         
         // Base :: I cam start from index 0 or index 1
         if ( n == 0 || n == 1) return cost[n];

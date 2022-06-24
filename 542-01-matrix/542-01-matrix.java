@@ -1,54 +1,40 @@
 class Solution {
     public int[][] updateMatrix(int[][] mat) {
         
-        // Iterate over the matrix and mark all the 1 to be -1
+        // Using DP
         int m = mat.length;
-        int n =mat[0].length;
+        int n = mat[0].length;
+        int INF = m + n + 1;
         
-        Queue<int[]> q = new LinkedList<>();
         
-        for (int i = 0; i < m; i++) {            
-            for (int j = 0; j < n; j++) {  
-               //add all 0 to queue, they are one level now for BFS
-               if (mat[i][j] == 0) q.add(new int[]{i, j});
-               if(mat[i][j] == 1) mat[i][j] = -1; 
-            }            
+        // First Move Up and Left -> Get the Min Distance
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j< n; j++) {
+             
+            int up = INF, left = INF;
+                
+             if (mat[i][j] == 0) continue;
+             
+             if (i - 1 >= 0 ) up = mat[i - 1][j];
+             if (j - 1 >= 0) left = mat[i][j - 1];
+                
+             mat[i][j] = Math.min(up, left) + 1;
+            }
         }
         
-        int dist = 1;
-        
-        while (!q.isEmpty()) {
-            
-            int size = q.size();
-            
-            for (int i = 0; i < size; i++) {
+        // Do it for right and bottom
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j>= 0; j--) {
                 
-              int[] na = q.poll();
-              int nr = na[0];
-              int nc = na[1];
+                int down = INF, right = INF;
                 
-              if (nr > 0 && mat[nr - 1][nc] == -1) {
-                  mat[nr - 1][nc] = dist;
-                  q.add(new int[]{nr - 1, nc});
-              }
-              if (nr < m - 1 && mat[nr + 1][nc] == -1){ 
-              mat[nr + 1][nc] = dist;
-               q.add(new int[] {nr + 1, nc});}
-                  
-              if (nc > 0 && mat[nr][nc - 1] == -1) {
-                  mat[nr][nc - 1] = dist;
-                  q.add(new int[]{nr, nc - 1});
-              }
-              if (nc < n - 1 && mat[nr][nc + 1] == -1) {
-                   mat[nr][nc + 1] = dist;
-                  q.add(new int[]{nr, nc + 1});
-              }
-                 
+                if (mat[i][j] == 0) continue;
                 
-            }  
-            
-            dist++;
-            
+                if (i < m-1) down = mat[i +  1][j];
+                if (j < n - 1) right = mat[i][j + 1];
+                
+                mat[i][j] = Math.min(mat[i][j], Math.min(right, down) + 1);
+            }
         }
         
         return mat;

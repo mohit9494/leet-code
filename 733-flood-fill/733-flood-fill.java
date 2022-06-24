@@ -1,25 +1,32 @@
 class Solution {
-    
-    private void dfs(int[][] image, int r, int c, int color, int newColor) {
-        
-     if (r < 0 || r >= image.length || c < 0 || c >= image[0].length || image[r][c] != color)                   return;   
-        
-        image[r][c] = newColor;
-        
-        dfs(image, r - 1, c, color, newColor);
-        dfs(image, r + 1, c, color, newColor);
-        dfs(image, r, c - 1, color, newColor);
-        dfs(image, r, c + 1, color, newColor);
-        
-    }
-    
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         
         if (image[sr][sc] == color) return image;
         
-        dfs(image, sr, sc, image[sr][sc], color);
+        // using bfs
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{sr, sc});
+        
+        int startPixel = image[sr][sc];
+        
+        while (!q.isEmpty()) {
+            
+            int[] na = q.poll();
+            int nr = na[0];
+            int nc = na[1];
+            
+            if (nr < 0 || nr >= image.length || nc < 0 || nc >= image[0].length || 
+                image[nr][nc] != startPixel) continue;
+            
+            image[nr][nc] = color;
+            
+            q.add(new int[]{nr - 1, nc});
+            q.add(new int[]{nr + 1, nc});
+            q.add(new int[]{nr, nc - 1});
+            q.add(new int[]{nr, nc + 1});
+            
+        }
         
         return image;
-        
     }
 }

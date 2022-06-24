@@ -10,11 +10,20 @@ class Solution {
                 
                 if (grid[i][j] == 1) {
                     
-                    // calculate water edge
-                    if (i == 0 || grid[i - 1][j] == 0) peri++;                    
-                    if (i == m - 1 || grid[i + 1][j] == 0) peri++;
-                    if (j == 0 || grid[i][j - 1] == 0) peri++;
-                    if (j == n - 1 || grid[i][j + 1] == 0) peri++;                    
+                    // when you hit the land - just multiply by 4
+                    peri += 4;
+                    
+                    // Just Check UP and Left is land or not
+                    // If it is then Just subtract 2 :: two walls matched
+                    
+                    if(i > 0 && grid[i - 1][j] == 1) peri -= 2;
+                    if (j > 0 && grid[i][j - 1] == 1) peri -= 2;
+                    
+                    // // calculate water edge
+                    // if (i == 0 || grid[i - 1][j] == 0) peri++;                    
+                    // if (i == m - 1 || grid[i + 1][j] == 0) peri++;
+                    // if (j == 0 || grid[i][j - 1] == 0) peri++;
+                    // if (j == n - 1 || grid[i][j + 1] == 0) peri++;                    
                     
                 }
                 

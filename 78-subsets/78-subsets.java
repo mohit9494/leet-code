@@ -4,18 +4,18 @@ class Solution {
     
     private void helper(int[] nums, int index, List<Integer> ds) {
         
-        if (index == nums.length) {
-            result.add(new ArrayList<>(ds));
-            return;
+        result.add(new ArrayList<>(ds));
+        // for loop based recursion
+        
+        for (int i = index; i < nums.length; i++) {
+            
+            ds.add(nums[i]);
+            helper(nums,i + 1, ds);
+            ds.remove(ds.size() - 1);
+            
         }
         
-        // choose
-        ds.add(nums[index]);
-        helper(nums, index + 1, ds);
-        ds.remove(ds.size() - 1);
         
-        // Not choose
-        helper(nums, index + 1, ds);
     }
     
     public List<List<Integer>> subsets(int[] nums) {

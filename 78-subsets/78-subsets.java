@@ -2,27 +2,25 @@ class Solution {
     
     List<List<Integer>> result = new ArrayList<>();
     
-    private void helper(int[] nums, int index, List<Integer> ds) {
-        
-        result.add(new ArrayList<>(ds));
-        // for loop based recursion
-        
-        for (int i = index; i < nums.length; i++) {
-            
-            ds.add(nums[i]);
-            helper(nums,i + 1, ds);
-            ds.remove(ds.size() - 1);
-            
-        }
-        
-        
-    }
-    
     public List<List<Integer>> subsets(int[] nums) {
         
         if (nums == null || nums.length == 0) return result;
         
-        helper(nums, 0, new ArrayList<>());
+        result.add(new ArrayList<Integer>());
+        
+        for (int num : nums) {
+            
+            int size = result.size();
+            
+            for (int j = 0; j < size; j++) {
+                
+             List<Integer> temp = result.get(j);
+             List<Integer> op  = new ArrayList<>(temp);
+             op.add(num);
+             result.add(op);
+            }
+         
+        }
         
         return result;
     }

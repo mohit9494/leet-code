@@ -2,29 +2,35 @@ class Solution {
     
     List<List<Integer>> result = new ArrayList<>();
     
-    private void helper(int[] nums, int index, List<Integer> ds, Set<Integer> set) {
-       
-       // Base case is imp
-       if (ds.size() == nums.length) {
+    private void swap(int[] arr, int i, int j) {
+        
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    
+    private void helper(int[] nums, int index) {
+        
+        // base
+        if (index == nums.length) {
             
-            result.add(new ArrayList<>(ds));
+            List<Integer> temp = new ArrayList<>();
+            
+            for (int i : nums) temp.add(i);
+           
+            result.add(temp);
             return;
         }
         
-        for (int i = 0; i < nums.length; i++) {
-            
-            if (!set.contains(nums[i])) {
-                
-            ds.add(nums[i]);
-            set.add(nums[i]);
-                
-            helper(nums, i + 1, ds, set);
-                
-            ds.remove(ds.size() - 1);
-            set.remove(nums[i]);
-                
-            }
-        }        
+        
+       for (int i = index; i < nums.length; i++) {
+           
+           swap(nums, index, i);
+           helper(nums, index + 1);
+           swap(nums, index, i);
+           
+       } 
+        
         
     }
     
@@ -32,9 +38,7 @@ class Solution {
         
         if (nums == null || nums.length == 0) return result;
         
-        Set<Integer> set = new HashSet<>();
-        
-        helper(nums, 0, new ArrayList<>(), set);
+        helper(nums, 0);
         
         return result;
     }

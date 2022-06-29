@@ -1,43 +1,41 @@
 class Solution {
     
-    List<List<Integer>> ans = new ArrayList<>();
+    List<List<Integer>> result = new ArrayList<>();
     
-    private void swap(int[] nums, int i, int j) {
-        
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-        
-    }
-    
-    private void helper(int[] nums, int index) {
-        
-        if (index >= nums.length) {
+    private void helper(int[] nums, int index, List<Integer> ds, Set<Integer> set) {
+       
+       // Base case is imp
+       if (ds.size() == nums.length) {
             
-            List<Integer> tmp = new ArrayList<>();
-            
-            for (int i : nums) tmp.add(i);
-            ans.add(tmp);            
+            result.add(new ArrayList<>(ds));
             return;
         }
         
-       for (int i = index ; i< nums.length; i++) {
-           
-           swap(nums, index, i);
-           
-           helper(nums, index + 1);
-           
-           swap(nums, index, i);
-           
-       } 
+        for (int i = 0; i < nums.length; i++) {
+            
+            if (!set.contains(nums[i])) {
+                
+            ds.add(nums[i]);
+            set.add(nums[i]);
+                
+            helper(nums, i + 1, ds, set);
+                
+            ds.remove(ds.size() - 1);
+            set.remove(nums[i]);
+                
+            }
+        }        
         
     }
     
     public List<List<Integer>> permute(int[] nums) {
         
-        helper(nums,0);
+        if (nums == null || nums.length == 0) return result;
         
-        return ans;
+        Set<Integer> set = new HashSet<>();
         
+        helper(nums, 0, new ArrayList<>(), set);
+        
+        return result;
     }
 }

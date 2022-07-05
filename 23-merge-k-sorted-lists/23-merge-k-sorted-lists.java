@@ -9,33 +9,49 @@
  * }
  */
 class Solution {
-    public ListNode mergeKLists(ListNode[] lists) {
-        
-        // we are given en K linkedlist heads
-        // we will arrange them in PriorityQueue Min 
-        
-        PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> Integer.compare(a.val, b.val));
-        for (ListNode node : lists) {
-            if (node != null) pq.add(node);
-        }
+    
+    private ListNode merge(ListNode h1, ListNode h2) {
         
         ListNode dummy = new ListNode(-1);
         ListNode curr = dummy;
         
-        while(!pq.isEmpty()) {
+        while (h1 != null && h2 != null) {
             
-            // This is the smallest head
-            ListNode node = pq.poll();
-            // Attach
-            curr.next = node;
+            if (h1.val < h2.val) {
+                curr.next = h1;
+                h1 = h1.next;
+            } else {
+                curr.next = h2;
+                h2 = h2.next;
+            }
             
-            // Move forward
             curr = curr.next;
+        }
+        
+        // either h1 or h2 is null
+        if(h1 == null) {
+            curr.next = h2;
+        } else {
+            curr.next = h1;
+        }
+        
+        return dummy.next;
+    }
+    
+    public ListNode mergeKLists(ListNode[] lists) {
+        
+        ListNode dummy = new ListNode(Integer.MIN_VALUE);
+        ListNode curr = dummy;
+        
+        // Merge the 2 lists and go till the end 
+        // Merge in Pairs
+        
+        for(ListNode head : lists) {
             
-            if(node.next != null) pq.add(node.next);
+            curr = merge(head, curr);
             
         }
         
-        return dummy.next;        
+        return dummy.next;
     }
 }

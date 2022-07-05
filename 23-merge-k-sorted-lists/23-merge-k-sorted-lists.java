@@ -38,20 +38,28 @@ class Solution {
         return dummy.next;
     }
     
+    private ListNode divideAndConcur(ListNode[] lists, int lo, int hi){
+        
+        if (hi < lo) return null;
+        
+        // only one list
+        if (lo == hi) return lists[lo];
+        
+        int mid = lo + (hi - lo)/2;
+        
+        ListNode left = divideAndConcur(lists, lo, mid);
+        ListNode right = divideAndConcur(lists, mid + 1, hi);
+        
+        // we have left and right merged
+        // Just merge  them and return new head;
+        return merge(left, right);
+        
+    }
+    
     public ListNode mergeKLists(ListNode[] lists) {
         
-        ListNode dummy = new ListNode(Integer.MIN_VALUE);
-        ListNode curr = dummy;
-        
-        // Merge the 2 lists and go till the end 
-        // Merge in Pairs
-        
-        for(ListNode head : lists) {
-            
-            curr = merge(head, curr);
-            
-        }
-        
-        return dummy.next;
+        if (lists == null || lists.length == 0) return null;
+       
+        return divideAndConcur(lists, 0, lists.length - 1);
     }
 }

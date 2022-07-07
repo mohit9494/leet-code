@@ -1,6 +1,7 @@
 class Solution {
     public double myPow(double x, int n) {
-        
+      
+     // This is very IMP :: Convert to long 
       long N = n;
         
       if (N == 0) return 1.0;

@@ -1,31 +1,33 @@
 class Solution {
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
         
-        
-        // Two pointer
-        int i = 0;
-        int j = arr.length - 1;
-        
-        while (j - i +  1 > k) {
+        // we want smallest distance from x :: we need K eleemnts
+        // Max Priority Queue
+        Queue<Integer> q = new PriorityQueue<>((a, b) -> {
+            int da = Math.abs(a - x);
+            int db = Math.abs(b - x);
             
-            int disl = Math.abs(arr[i] - x);
-            int disr = Math.abs(arr[j] - x);
+            if(da == db) {
+                // If distance are equal -> compare based on their values
+                return Integer.compare(b,a);
+            } 
             
-            if (disl > disr) {
-                // Move to left
-                i++;
-            } else {
-                // If equal or disr is more
-                j--;
-            }
+            return Integer.compare(db, da);            
+        });
+            
+        for (int i : arr) {
+            q.add(i);
+            if (q.size() > k) q.poll();
             
         }
         
+        System.out.println(q);
+        
+        // we have the output in pq
         List<Integer> result = new ArrayList<>();
-       // Now we are at proper i and j position
-        for(int a = i; a <= j; a++) {
-         result.add(arr[a]);   
-        }
+        while(!q.isEmpty()) result.add(q.poll());
+        
+        Collections.sort(result);
         
         return result;
     }

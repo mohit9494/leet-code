@@ -1,34 +1,23 @@
 class Solution {
+    
+    private double helper(double x, long n){
+        
+        if (n == 0) return 1.0;
+        
+       return n % 2 == 0 ? helper(x * x, n/2) :  x * helper(x * x, n/2);
+        
+    }
+    
     public double myPow(double x, int n) {
-      
-     // This is very IMP :: Convert to long 
-      long N = n;
         
-      if (N == 0) return 1.0;
+        long N = n;
         
-     if (N < 0) {
-         N = -N;
-         x = 1 / x;
-     }
-        
-        double ans = 1.0;
-        
-        while (N > 0) {
-            
-            // If n is even
-            if (N % 2 == 0) {
-                
-                x = x * x;
-                N =  N / 2;
-                
-            } else  {
-                
-             ans = ans * x;
-             N = N - 1;
-                
-            }
+        if (n < 0) {
+            N = -N;
+            x = 1/x;
         }
-       
-        return ans;
+        
+        return helper(x, N);
+        
     }
 }

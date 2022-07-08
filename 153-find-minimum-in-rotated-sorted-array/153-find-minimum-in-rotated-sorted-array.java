@@ -1,23 +1,24 @@
 class Solution {
-    
-    // Find the minimum from rotated sorted array
-    
     public int findMin(int[] nums) {
         
-        int left = 0;
-        int right = nums.length - 1;
+        // Just keep it very simple
+        // we need to find the min
+        // shrink it to min index
+        int lo = 0;
+        int hi = nums.length - 1;
         
-        while(left < right) {
+        while (lo < hi) {
             
-            int mid = left + (right - left)/2 ;
+            int mid = lo + (hi - lo)/2;
             
-            if (nums[mid] > nums[right]) {
-                left = mid + 1;
-            } else if (nums[mid] < nums[right]) {
-                right = mid; // mid can be minimum
+            if (nums[mid] > nums[hi]) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
             }
+            
         }
         
-        return nums[left];
+        return nums[lo];
     }
 }

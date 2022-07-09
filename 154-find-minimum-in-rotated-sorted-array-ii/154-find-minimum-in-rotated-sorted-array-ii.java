@@ -6,6 +6,7 @@ class Solution {
         int right = nums.length - 1;
         
         while(left < nums.length - 1 && nums[left] == nums[left + 1]) left++;
+        if (left == nums.length - 1) return nums[left];
         
         while (right > 0 && nums[right] == nums[right - 1]) right--;
         

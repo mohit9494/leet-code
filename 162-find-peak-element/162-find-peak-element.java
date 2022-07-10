@@ -1,6 +1,7 @@
 class Solution {
     public int findPeakElement(int[] nums) {
         
+        // This is classis BS on answer problem
         if(nums.length == 1) return 0;
         
         int left = 0;
@@ -9,18 +10,14 @@ class Solution {
         while(left <= right) {
             
             int mid = left + (right - left)/2;
+            int gr = mid + 1 <= nums.length - 1 ? nums[mid + 1] : Integer.MIN_VALUE;
+            int less = mid - 1 >= 0 ? nums[mid - 1] : Integer.MIN_VALUE;
             
-            int val = nums[mid];            
-            int le = mid == 0 ? Integer.MIN_VALUE: nums[mid - 1];
-            int re = mid == nums.length - 1 ? Integer.MIN_VALUE : nums[mid + 1];
+            if (nums[mid] > gr && nums[mid] > less) return mid;
             
-            if (val > le && val > re) return mid;
-            else if (val > re) {
-                // I am on the downword slope
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
+            if (nums[mid] < gr) left = mid + 1;
+            else right = mid - 1;
+            
         }
         
         return -1;

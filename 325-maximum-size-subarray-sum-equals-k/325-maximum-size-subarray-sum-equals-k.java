@@ -15,11 +15,11 @@ class Solution {
             maxi = i + 1;
             
         } else  {
+            
             if (map.containsKey(sum - k)) {
                 maxi = Math.max(maxi, i - map.get(sum - k));
             } 
-                
-            
+    
         }
         
         map.putIfAbsent(sum, i);

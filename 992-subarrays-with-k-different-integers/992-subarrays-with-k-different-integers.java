@@ -26,28 +26,11 @@ class Solution {
           // Now we are in bounds
           ans += j - i + 1;
           j++;
-            
-//           if (map.size() <= k) {
-//               ans += j - i + 1;
-//               j++;
-//           } else {
-//               // map.size() > k
-//               while (map.size() > k) {
-                
-//                   int fre = map.get(nums[i]);
-                  
-//                   if (fre == 1) map.remove(nums[i]);
-//                   else map.put(nums[i], fre - 1);
-                  
-//                   i++;
-//               }
-              
-//               j++;
-//           }
+
         }
-        
-        
+               
       return ans;
+        
     }
     
     public int subarraysWithKDistinct(int[] nums, int k) {

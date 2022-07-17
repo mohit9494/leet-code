@@ -44,7 +44,7 @@ class Solution {
           if (haystack.charAt(i) == needle.charAt(j)) {
               i++;
               j++;
-              if (j == m) return i - m;
+              if (j == m) return i - j;
           } else if (j > 0) {
               j = lps[j - 1];
           } else if (j == 0) {

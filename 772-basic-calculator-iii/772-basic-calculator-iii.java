@@ -1,85 +1,89 @@
-
-
 class Solution {
     
-public class Pair {
-   
-    Stack<Integer> st;
-    char sign;
-    
-    Pair(Stack<Integer> st, char sign) {
-        this.st = st;
-        this.sign = sign;
-    }
-    
-}
-    
-    public void cal(Stack<Integer> st, int num, char lastsign) {
+    class Pair {
         
-              // lets see what to do with this val
-        if (lastsign == '+') {
-            st.add(num);
-        } else if (lastsign == '-') {
-            st.add(-num);
-        } else if (lastsign == '*') {
-            st.add(st.pop() * num);
-        } else if (lastsign == '/') {
-            st.add(st.pop() / num);
-        }  
+        Stack<Integer> resultStack;
+        char sign;
+        
+        Pair(Stack<Integer> resultStack, char sign) {
+            this.resultStack = resultStack;
+            this.sign = sign;
+        }
         
     }
+    
+    public void cal(Stack<Integer> st, int val, char sign) {
+        
+        if (sign == '+') {
+                st.add(val);
+            } else if (sign == '-') {
+                st.add(-val);
+            } else if (sign == '*') {
+                st.add(st.pop() * val);
+            }
+            else if (sign == '/') {
+                st.add(st.pop() / val);
+            }
+    }
+    
     public int calculate(String s) {
         
-        s = s.trim();
-        
+        //based on Calculator 2;
+        // Here we have both the () and * /
+
         Stack<Integer> st = new Stack<>();
         Stack<Pair> stp = new Stack<>();
-        char lastsign = '+';
+        char sign = '+';
         
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < s.length(); i++){
             
             char c = s.charAt(i);
             
-            // If digit calculate it on the one go and deal with it immediately
+            if (c == ' ') continue;
             
             if (Character.isDigit(c)) {
-                int num = 0;               
-                while ( i < s.length() && Character.isDigit(s.charAt(i))) {
-                    num = num * 10 + (s.charAt(i) - '0');
+                int val = 0;
+                // Get the digit at once and dump it in stack
+                while (i < s.length() && Character.isDigit(s.charAt(i))) {
+                    val = val * 10 + (s.charAt(i) - '0');
                     i++;
                 }
                 i--;
                 
-                cal(st, num, lastsign);
+                cal(st, val, sign);
                 
             } else if (c == '(') {
-                stp.add(new Pair(st, lastsign));
+            // get the earlier stack and sign and dump it the stack
+
+                stp.add(new Pair(st, sign));
+                
                 st = new Stack<>();
-                lastsign = '+';
-            } else if (c == ')') {
-                // calculate temp result;
+                sign = '+';
+                
+            } else  if (c == ')') {
+                
+                // calculate the result1 of inner bracket 
                 int temp = 0;
                 while (!st.isEmpty()) temp += st.pop();
                 
-                // get the previous stack and sign
+                // merge with the previous result
                 Pair pair = stp.pop();
-                lastsign = pair.sign;
-                st = pair.st;
+                sign = pair.sign;
+                st = pair.resultStack;
                 
-                cal(st, temp, lastsign);
+                cal(st, temp, sign);
                 
+            } else {
+                sign = c;
             }
-            else if (c != ' ') {
-               lastsign = c; 
-            }            
-
+    
         }
         
         int result = 0;
-        while (!st.isEmpty()) {
-            result += st.pop();
-        }
+        
+        while (!st.isEmpty()) result += st.pop();
         
         return result;
+        
     }
 }

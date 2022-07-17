@@ -44,7 +44,7 @@ class Solution {
         }
         
         // for last num
-        if (num != 0) result += sign * num;
+         result += sign * num;
         
         return result;
     }

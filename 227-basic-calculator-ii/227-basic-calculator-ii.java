@@ -31,7 +31,8 @@ class Solution {
                     st.add(st.pop() / num);
                 }
                 
-            } else if (c != ' ') {
+            }
+            else if (c != ' ') {
                lastsign = c; 
             }            
 

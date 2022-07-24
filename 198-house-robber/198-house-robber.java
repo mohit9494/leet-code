@@ -1,26 +1,22 @@
 class Solution {
     public int rob(int[] nums) {
         
-        if (nums == null || nums.length == 0) return 0;
         int n = nums.length;
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        if (n == 1) return dp[0];
+        dp[1] = Math.max(nums[0], nums[1]);
         
-        if (n == 1) return nums[0];
-        
-        // Initialize the dp array
-        // we need (i - 2) amount so we need to initialize first 2 places
-        int prev = nums[0];
-        int curr = Math.max(nums[0], nums[1]);
-        
-        // start from 2
-        for (int i = 2; i < n; i++) {
+        for (int i = 2; i <= n - 1; i++) {
             
-            int temp = curr;
-            // Take max from not choose and choose
-            curr = Math.max(curr, nums[i] + prev);
+            // pick
+            int pick = nums[i] + dp[i - 2];
+            // not pick
+            int notPick = dp[i - 1];
             
-            prev = temp;
+            dp[i] = Math.max(pick, notPick);
         }
-        
-        return curr;
+      
+        return dp[n - 1];
     }
 }

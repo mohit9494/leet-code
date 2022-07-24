@@ -1,20 +1,22 @@
 class Solution {
     
     public int helper(int[] nums, int start, int end) {
-       
-        int[] dp = new int[end + 1];
-        dp[start] = nums[start];
-        dp[start + 1] = Math.max(nums[start], nums[start + 1]);
+
+        int a = nums[start];
+        int b = Math.max(nums[start], nums[start + 1]);
+        int c = b;
         
         for (int i = start + 2; i <= end; i++) {
             
-            int pick = nums[i] + dp[i - 2];
-            int notPick = dp[i - 1];
+            int pick = nums[i] + a;
+            int notPick = b;
             
-            dp[i] = Math.max(pick, notPick);
+            c = Math.max(pick, notPick);
+            a = b;
+            b = c;
         }
         
-        return dp[end];
+        return c;
     }
     
     public int rob(int[] nums) {

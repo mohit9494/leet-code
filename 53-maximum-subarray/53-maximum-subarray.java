@@ -3,13 +3,26 @@ class Solution {
         
         if (nums.length == 1) return nums[0];
         
-        int sum = 0;
-        int maxi = Integer.MIN_VALUE;
+        int sum = nums[0];
+        int maxi = nums[0];
+        int start = 0;
+        int end = 0;
         
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 1; i < nums.length; i++) {
             // Get the effective running sum;
-            sum = Math.max(sum + nums[i], nums[i]);
-            maxi = Math.max(sum, maxi);
+            if (sum + nums[i] < nums[i]) {
+                // everything before this was useless
+                start = i;
+                sum = nums[i];
+                maxi = Math.max(maxi, sum);
+            } else {
+                sum = sum + nums[i];
+                
+                if (sum > maxi) {
+                    maxi = sum;
+                    end = i;
+                }
+            }
         }
         
         return maxi;

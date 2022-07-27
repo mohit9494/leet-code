@@ -13,11 +13,11 @@ class Solution {
             if (sum + nums[i] < nums[i]) {
                 // everything before this was useless
                 start = i;
+                end = i;
                 sum = nums[i];
                 maxi = Math.max(maxi, sum);
             } else {
-                sum = sum + nums[i];
-                
+                sum = sum + nums[i];              
                 if (sum > maxi) {
                     maxi = sum;
                     end = i;

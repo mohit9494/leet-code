@@ -35,23 +35,24 @@ class Solution {
             return;
         }
         
-        int j = nums.length - 1;        
-        while (j >= 0 && i >= 0) {
-            if (nums[j] > nums[i]) break;
-            j--;
+        // At this point we have i. scan from the end. Find number greater than nums[i] and swap it        
+        int z = nums.length - 1;        
+        while (z >= 0) {
+            if (nums[z] > nums[i]) break;
+            z--;
         }
         
-        // swap i and j
-       if (i >= 0 && j >= 0) swap(nums, i, j);       
+        // swap i and z
+        swap(nums, i, z);       
         
         // reverse from i + 1 to end
         i = i + 1;
-        j = nums.length - 1;
+        z = nums.length - 1;
         
-        while (i <= j) {
-        swap(nums, i, j);
+        while (i <= z) {
+        swap(nums, i, z);
         i++;
-        j--;
+        z--;
         }
         
     }

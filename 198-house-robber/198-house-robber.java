@@ -7,17 +7,19 @@ class Solution {
         if (n == 1) return nums[0];
         
         int[] dp = new int[n];
-        dp[0] = nums[0];
-        dp[1] = Math.max(nums[0], nums[1]);
-        
+        int a = nums[0];
+        int b = Math.max(nums[0], nums[1]);
+        int c = b;
         for (int i = 2; i <= n - 1; i++) {
-            int pick = nums[i] + dp[i - 2];
-            int notPick = dp[i - 1];
+            int pick = nums[i] + a;
+            int notPick = b;
             
-            dp[i] = Math.max(pick, notPick);
+            c = Math.max(pick, notPick);
+            a = b;
+            b = c;
         }
         
-       return dp[n - 1];
+       return c;
         
     }
 }

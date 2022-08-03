@@ -14,9 +14,6 @@ class Solution {
           
             int index = i % n;
             
-            // break condition
-            // if (i >= n && !st.isEmpty() && nums[index] == st.peek()) break;
-            
             while (!st.isEmpty() && nums[index] > nums[st.peek()]) {
                 
                 // nums[index] is the ans

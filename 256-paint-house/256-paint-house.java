@@ -1,27 +1,44 @@
 class Solution {
-    public int minCost(int[][] costs) {
+    
+    int[][] costs;
+    
+    public int helper(int house, int lastColor, int[][] dp) {
         
-        if(costs == null || costs.length == 0) return 0;
-        
-        int n = costs.length;
-        
-        int[][] dp = new int[n][3];
-        
-        // Initialize dp array last roq -> we are going bottom up
-        dp[n - 1][0] = costs[n-1][0];
-        dp[n - 1][1] = costs[n-1][1];
-        dp[n - 1][2] = costs[n-1][2];
-        
-        // start from the second last row
-        for(int i = n-2; i >= 0; i--) {            
-               
-         dp[i][0] = costs[i][0] + Math.min(dp[i + 1][1], dp[i + 1][2]);
-         dp[i][1] = costs[i][1] + Math.min(dp[i + 1][0], dp[i + 1][2]);
-         dp[i][2] = costs[i][2] + Math.min(dp[i + 1][0], dp[i + 1][1]);
-            
+        if (house == 0) {
+            int min = Integer.MAX_VALUE;
+            for (int i = 0; i<= 2; i++) {
+                if (i != lastColor) {
+                 min = Math.min(min, costs[house][i]) ;
+                }
+            }
+            return min;
         }
         
-        // return the result from first row
-        return Math.min(dp[0][0], Math.min(dp[0][1], dp[0][2]));
+        if (dp[house][lastColor] != -1) return dp[house][lastColor];
+        
+        // U start from last house
+        int min = Integer.MAX_VALUE;
+        
+        for (int i = 0; i <= 2; i++) {
+            if (i != lastColor) {
+                int cost = costs[house][i] + helper(house - 1, i, dp);
+                min = Math.min(min, cost);
+            }
+        }
+        
+        return dp[house][lastColor] = min;
+    }
+    
+    public int minCost(int[][] costs) {
+        this.costs = costs;
+        int n = this.costs.length;
+        int m = this.costs[0].length;
+        
+        int[][] dp = new int[n][m + 1] ;// m + 1 for impossible color
+        for (int[] arr : dp) {
+            Arrays.fill(arr, -1);
+        }
+        // Start with house number -> n - 1 and prev color = 3 -> Impossible value
+        return helper(n - 1, m, dp);
     }
 }

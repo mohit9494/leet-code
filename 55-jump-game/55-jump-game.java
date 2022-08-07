@@ -22,6 +22,8 @@ class Solution {
     public boolean canJump(int[] nums) {
         this.dp =  new String[nums.length];
         Arrays.fill(this.dp, "U");
-       return canJumpfrom(0, nums); 
+       boolean result =  canJumpfrom(0, nums);
+        System.out.println(Arrays.toString(this.dp));
+        return result;
     }
 }

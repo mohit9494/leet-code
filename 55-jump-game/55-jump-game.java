@@ -19,6 +19,9 @@ class Solution {
             }
             dp[i] = dp[i] == "U" ? "B" : "G";
         }
+        
+        System.out.println(Arrays.toString(dp));
+        
      return dp[0] == "G";   
     }
 }

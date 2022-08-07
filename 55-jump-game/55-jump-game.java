@@ -8,10 +8,8 @@ class Solution {
       
            if (nums[i] + i >= lastIndex) {
                lastIndex = i;
-           } 
-            
-        }
-        
+           }           
+        }     
         
      return lastIndex == 0 ;   
     }

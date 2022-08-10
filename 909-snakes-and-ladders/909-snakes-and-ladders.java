@@ -58,6 +58,7 @@ class Solution {
                         arr[child] = -2;
                     } else {
                         // if (arr[child] > 0 like 15 or 30)
+                        // This is very IMP :: Your Jump can be leading to destination
                         if (arr[child] == n * n) return count + 1;
                         q.add(arr[child]);
                         arr[child] = -2;

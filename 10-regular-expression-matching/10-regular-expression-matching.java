@@ -9,9 +9,6 @@ class Solution {
         // if only pattern goes oob means String is yet to be matched fully
         if (j >= p.length()) return false; 
         
-        // // if i goes oob then entire string is matched already
-        // if (i >= s.length()) return true;
-        
         // logic
         boolean match = i < s.length() && (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.');
         

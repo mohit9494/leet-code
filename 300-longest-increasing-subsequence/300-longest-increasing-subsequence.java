@@ -16,11 +16,9 @@ class Solution {
             } else {
                 // find the proper place to insert/replace the nums[i] in effective array using BS
                 int bi = BinarySearch(arr, 0, j-1, nums[i]);
-                System.out.println(bi);
                 arr[bi] = nums[i];
             }
         }
-        System.out.println(Arrays.toString(arr));
         // return length of effective array as ans;
         return j;
     }

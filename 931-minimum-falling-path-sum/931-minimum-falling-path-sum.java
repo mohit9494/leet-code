@@ -14,6 +14,7 @@ class Solution {
         // for (int k = 0; k < n; k++) dp[n - 1][k] = matrix[n - 1][k];
                                                  
         for (int i = n - 2; i >=0 ; i--) {
+            // This is IMP
             curr = new int[n];
             for (int j = 0; j < n; j++) {
                 int val = matrix[i][j];
@@ -25,11 +26,9 @@ class Solution {
                 
                 curr[j] = Math.min(l, Math.min(c, r));
             }
+            // switch it
             prev = curr;
-            System.out.println(Arrays.toString(curr));
         }
-        
-        //System.out.println(Arrays.deepToString(dp));
          
          int min = Integer.MAX_VALUE;
          for (int z = 0; z < n ; z++) {

@@ -3,16 +3,11 @@ class Solution {
      List<List<Integer>> ans = new ArrayList<>();
     
     public void helper(int[] arr, int target, int index, List<Integer> ds) {
-        
-        
-        
+
             if (target == 0) {
                 ans.add(new ArrayList<>(ds));
                 return;
             }
-           
-        
-        
         // select using for loop
         for (int i = index; i < arr.length; i++) {
             if (i > index && arr[i] == arr[i - 1]) continue;

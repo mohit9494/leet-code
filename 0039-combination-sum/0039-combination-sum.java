@@ -10,19 +10,17 @@ class Solution {
                 return;
             }            
         
-        // select
+        // select unlimited
         ds.add(a[index]);
         helper(a, target - a[index], ds, index, n);
-        
-        // Not select
         ds.remove(ds.size() - 1);
-        helper(a, target, ds, index + 1, n);
         
+        // Not select 
+        helper(a, target, ds, index + 1, n);        
     }
     
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        
-        if (candidates.length == 0) return result;
+
         
         helper(candidates, target, new ArrayList<>(), 0, candidates.length);
         

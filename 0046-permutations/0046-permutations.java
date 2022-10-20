@@ -2,26 +2,33 @@ class Solution {
     
     List<List<Integer>> ans = new ArrayList<>();
     
-    public void helper(int[] arr, List<Integer> ds, boolean[] flag){
-        if (ds.size() == arr.length) {
-            ans.add(new ArrayList<>(ds));
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    
+    public void helper(int[] arr, int index){
+      
+        if (index == arr.length) {
+            List<Integer> temp = new ArrayList<>();
+            for (int k : arr) temp.add(k);
+            ans.add(temp);
             return;
         }
         
-        for (int i = 0; i < arr.length; i++) {
-            if (!flag[i]) {
-                flag[i] = true;
-                ds.add(arr[i]);
-                helper(arr, ds, flag);
-                ds.remove(ds.size() - 1);
-                flag[i] = false;
+        for (int i = index; i < arr.length; i++) {
+                
+            swap(arr, i, index);
+            helper(arr, index + 1);
+            swap(arr, i, index);
             }
         }
-    }
+    
     
     public List<List<Integer>> permute(int[] nums) {
       
-        helper(nums, new ArrayList<>(), new boolean[nums.length]);
+        helper(nums, 0);
         
         return ans;
     }

@@ -1,7 +1,7 @@
 class Solution {
     
     public int helper(int n, int[] cost, int[] dp) {
-        if (n == 0 || n == 1) return cost[n];
+        if (n < 0) return 0;
         if (dp[n] != -1) return dp[n];
         return dp[n] = cost[n] + Math.min(helper(n - 1, cost, dp), helper(n - 2, cost, dp));
     }

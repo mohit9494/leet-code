@@ -2,9 +2,7 @@ class Solution {
     
     public int helper(int[] nums, int index, int[] dp) {
         
-        if (index == nums.length - 1) {
-            return nums[index];
-        } else if (index >= nums.length) {
+     if (index >= nums.length) {
             return 0;
         }
         if (dp[index] != -1) return dp[index];

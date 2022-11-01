@@ -15,7 +15,7 @@ class Solution {
     
     public int minimumTotal(List<List<Integer>> triangle) { 
         int m = triangle.size();
-        int[][] dp = new int[m + 1][m + 1];
+        int[][] dp = new int[m][m];
         for (int[] arr : dp) Arrays.fill(arr, -1);
         return helper(triangle, 0, 0, dp);
     }

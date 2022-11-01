@@ -3,7 +3,7 @@ class Solution {
     
     public int helper(List<List<Integer>> arr, int i, int j, int[][] dp) {
         
-        if (i == arr.size() - 1) return arr.get(i).get(j);
+        if (i == arr.size()) return 0;
         
         if (dp[i][j] != -1) return dp[i][j];
         

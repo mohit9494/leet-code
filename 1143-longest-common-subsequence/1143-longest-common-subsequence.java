@@ -5,11 +5,11 @@ class Solution {
     
     public int helper(int i, int j, int[][] dp) {
         
-        if (i < 0 || j < 0) return 0;
+        if (i == 0 || j == 0) return 0;
         
         if (dp[i][j] != -1) return dp[i][j];
         // Match and No Match
-        if (str1.charAt(i) == str2.charAt(j)) {
+        if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
           return  dp[i][j] = 1 + helper(i - 1, j - 1, dp);
         } 
        
@@ -21,8 +21,8 @@ class Solution {
       int m = text2.length();
       str1 = text1;
       str2 = text2;
-      int[][] dp = new int[n][m];
+      int[][] dp = new int[n + 1][m + 1];
       for (int[] arr : dp) Arrays.fill(arr, -1);
-      return helper(n - 1, m - 1, dp);  
+      return helper(n, m, dp);  
     }
 }

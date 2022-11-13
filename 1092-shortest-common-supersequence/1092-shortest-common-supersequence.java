@@ -19,7 +19,7 @@ class Solution {
             }
         }
         
-        // use the dp array;
+        // use the same dp array;
         int a = n;
         int b = m;
         

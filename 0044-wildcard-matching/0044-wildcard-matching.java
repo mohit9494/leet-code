@@ -32,6 +32,7 @@ class Solution {
             return temp;
         } else {
             // no match at all
+            dp[i][j] = 0;
             return false;
         }
     }

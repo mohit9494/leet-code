@@ -1,26 +1,23 @@
 class Solution {
-    public int maxProfit(int[] arr) {
+    
+    public int helper(int i, int buy, int[] arr, int[][] dp) {
+        if (i == arr.length) return 0;
         
-        // using vally and peak algo
-        // always get vally first - at v -> buy;
-        // total profit = sum(p) - sum(v)
-        int n = arr.length;
-        int i = 0;
+        if (dp[i][buy] != -1) return dp[i][buy];
+        
         int profit = 0;
-        int v = arr[0];
-        int p = arr[0];
-        
-        while (i < n - 1) {
-            
-            while (i < n - 1 && arr[i] >= arr[i + 1]) i++;
-            v = arr[i];
-            
-            while (i < n - 1 && arr[i] <= arr[i + 1]) i++;
-            p = arr[i];           
-            
-           profit += p - v ;
+        // either buy / not buy
+        if (buy == 1) {
+            profit = Math.max(-arr[i] + helper(i +  1, 0, arr, dp), 0 + helper(i + 1, 1, arr, dp));
+        } else {
+            profit = Math.max(arr[i] + helper(i +  1, 1, arr, dp), 0 + helper(i + 1, 0, arr, dp));
         }        
-
-        return profit;
+        return dp[i][buy] = profit;
+    }
+    
+    public int maxProfit(int[] arr) {        
+        int[][] dp = new int[arr.length][2];
+        for (int[] k : dp) Arrays.fill(k, -1);
+        return helper(0, 1, arr, dp);
     }
 }

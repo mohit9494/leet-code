@@ -10,7 +10,6 @@ class Solution {
        int[] curr = new int[n + 1];
       
        for (int i = n - 1; i >= 0 ; i--) {
-           curr = new int[n + 1];
            for (int prev = i - 1; prev >= -1; prev--) {
                
                 // pick and non-pick

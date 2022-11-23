@@ -1,22 +1,5 @@
 class Solution {
     
-    public int helper(int i, int prev, int[] arr, int[][] dp) {
-        
-        if (i >= arr.length) return 0;
-        
-        if (dp[i][prev + 1] != -1) return dp[i][prev + 1];
-        // pick and non-pick
-        int pick = 0;
-        
-        if (prev == -1 || arr[i] > arr[prev]) {
-            pick = 1 + helper(i + 1, i, arr, dp);
-        }
-        
-        int np = 0 + helper(i + 1, prev, arr, dp);
-        
-        return dp[i][prev + 1] = Math.max(pick, np);
-    }
-    
     public int lengthOfLIS(int[] arr) {
        // consider using previous index and current index 
        // use right shifting for prev index since you cannot store -1  

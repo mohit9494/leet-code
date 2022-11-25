@@ -13,7 +13,7 @@ class Solution {
         Arrays.fill(dp, 1);
         
         for (int i = 0; i <= n - 1; i++) {
-             hash[i] = i;
+              hash[i] = i;
             for (int prev = i - 1; prev >= 0; prev--) {
                 if (arr[i] % arr[prev] == 0 && dp[i] < 1 + dp[prev]) {
                     dp[i] = 1 + dp[prev];
@@ -34,7 +34,7 @@ class Solution {
            lastIndex = hash[lastIndex];
            ans.add(arr[lastIndex]);           
        }
-        // System.out.println(Arrays.toString(hash));
+        System.out.println(Arrays.toString(dp));
         System.out.println(Arrays.toString(hash));
         
         return ans;

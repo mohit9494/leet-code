@@ -25,14 +25,14 @@ class Solution {
         
        List<Integer> ans = new ArrayList<>(); 
        ans.add(0, arr[lastIndex]);
-       lastIndex = hash[lastIndex];
         
        while(lastIndex != hash[lastIndex]) {
-           ans.add(0, arr[lastIndex]);
            lastIndex = hash[lastIndex];
+           ans.add(0, arr[lastIndex]);
        }
         
-     System.out.println(ans);
+      System.out.println(ans);
+
     return maxi;
     }
 }

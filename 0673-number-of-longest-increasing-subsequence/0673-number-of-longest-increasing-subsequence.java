@@ -22,6 +22,7 @@ class Solution {
             }
             maxi = Math.max(maxi, dp[i]);
         }
+        
         int ans = 0;
         for (int k = 0; k <= n - 1; k++) {
             // calculate for each maxi value

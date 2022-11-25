@@ -34,7 +34,9 @@ class Solution {
            lastIndex = hash[lastIndex];
            ans.add(arr[lastIndex]);           
        }
-
+        // System.out.println(Arrays.toString(hash));
+        System.out.println(Arrays.toString(hash));
+        
         return ans;
     }
 }

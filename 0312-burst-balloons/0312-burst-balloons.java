@@ -25,7 +25,7 @@ class Solution {
      arr[0] = 1;
      arr[n - 1] = 1;
      for (int i = 0; i<= nums.length - 1; i++) arr[i + 1] = nums[i];
-     int[][] dp = new int[n - 1][n - 1];
+     int[][] dp = new int[n][n];
      for (int[] a : dp) Arrays.fill(a, -1);
      return helper(1, n - 2, arr, dp);
     }

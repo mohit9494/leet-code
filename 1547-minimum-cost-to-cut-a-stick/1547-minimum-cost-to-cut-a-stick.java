@@ -29,7 +29,7 @@ class Solution {
         // Imp
         Collections.sort(arr);
         
-        int[][] dp = new int[cuts.length + 1][cuts.length + 1];
+        int[][] dp = new int[arr.size()][arr.size()];
         for(int[] a : dp) Arrays.fill(a, -1); 
         return helper(1, arr.size() - 2, arr, dp);
     }
